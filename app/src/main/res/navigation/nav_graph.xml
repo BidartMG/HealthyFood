@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ort.healthyfoods.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/principalFragment"
+        android:name="com.ort.healthyfoods.fragments.PrincipalFragment"
+        android:label="fragment_principal"
+        tools:layout="@layout/fragment_principal" >
+        <action
+            android:id="@+id/action_principalFragment_to_listFoodFragment"
+            app:destination="@id/listFoodFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.ort.healthyfoods.fragments.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.ort.healthyfoods.fragments.AddFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_add_food" />
+    <fragment
+        android:id="@+id/listFoodFragment"
+        android:name="com.ort.healthyfoods.fragments.ListFoodFragment"
+        android:label="list_food_fragment"
+        tools:layout="@layout/list_food_fragment" >
+        <action
+            android:id="@+id/action_listFoodFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_listFoodFragment_to_addFoodFragment"
+            app:destination="@id/addFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.ort.healthyfoods.fragments.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="comida"
+            app:argType="com.ort.healthyfoods.entities.Food" />
+    </fragment>
+    <fragment
+        android:id="@+id/listBreackfastFragment"
+        android:name="com.ort.healthyfoods.fragments.ListBreackfastFragment"
+        android:label="list_breackfast_fragment"
+        tools:layout="@layout/list_breackfast_fragment" >
+        <action
+            android:id="@+id/action_listBreackfastFragment_to_addBreakfastFragment"
+            app:destination="@id/addBreakfastFragment" />
+        <action
+            android:id="@+id/action_listBreackfastFragment_to_detailBreakfastFragment"
+            app:destination="@id/detailBreakfastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBreakfastFragment"
+        android:name="com.ort.healthyfoods.fragments.AddBreakfastFragment"
+        android:label="fragment_add_breakfast"
+        tools:layout="@layout/fragment_add_breakfast" />
+    <fragment
+        android:id="@+id/detailBreakfastFragment"
+        android:name="com.ort.healthyfoods.fragments.DetailBreakfastFragment"
+        android:label="fragment_detail_breakfast"
+        tools:layout="@layout/fragment_detail_breakfast" >
+        <argument
+            android:name="comida"
+            app:argType="com.ort.healthyfoods.entities.Food" />
+    </fragment>
+</navigation>
