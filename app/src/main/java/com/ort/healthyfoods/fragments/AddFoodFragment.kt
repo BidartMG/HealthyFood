@@ -51,7 +51,7 @@ class AddFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         btnAgregar.setOnClickListener() {
-            agregarComida()
+            agregarComida()// TODO poner logica de verificar que estén todos los campos completos
             clear()
         }
         btnCancelar.setOnClickListener() {
