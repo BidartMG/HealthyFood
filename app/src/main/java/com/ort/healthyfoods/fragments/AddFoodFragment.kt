@@ -61,7 +61,7 @@ class AddFoodFragment : Fragment() {
     }
 
     private fun agregarComida() {
-        val comidaPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),10)
+        val comidaPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),calorias.text.toString().toInt())
         val newFood = hashMapOf(
             "idComida" to comidaPrueba.idComida,
             "nombre" to comidaPrueba.nombre,

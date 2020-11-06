@@ -30,9 +30,7 @@ class AddBreakfastFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +47,6 @@ class AddBreakfastFragment : Fragment() {
 
         return vista
     }
-
     override fun onStart() {
         super.onStart()
         btnAgregar.setOnClickListener() {
@@ -61,7 +58,6 @@ class AddBreakfastFragment : Fragment() {
             // TODO ver si quiero redirigir a principal
         }
     }
-
     private fun agregarDesayuno() {
         val desayunoPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),10)
         val newFood = hashMapOf(
@@ -83,7 +79,6 @@ class AddBreakfastFragment : Fragment() {
                 showAlert("Entró al ERROR")
             }
     }
-
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Hola")

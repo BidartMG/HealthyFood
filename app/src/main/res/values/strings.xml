@@ -2,4 +2,9 @@
     <string name="app_name">Healthy foods</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_food">Agregar comida</string>
+    <string name="add_breakfast">Agregar desayuno / merienda</string>
+    <string name="add_snack">Agregar Colación / Snack</string>
+  
+
 </resources>

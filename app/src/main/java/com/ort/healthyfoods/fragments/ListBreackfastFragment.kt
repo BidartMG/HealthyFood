@@ -42,8 +42,8 @@ class ListBreackfastFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // viewModel.initDesayYMeriendas()
-        // viewModel.cargarDes_Mer_Base()
+         viewModel.initDesayYMeriendas()
+         viewModel.cargarDes_Mer_Base()
         // DESAYUNOS
         db.collection("desayunosYmeriendas")
             .get()
@@ -81,9 +81,7 @@ class ListBreackfastFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         // TODO VER POR QUÉ DEMORA EN MOSTRAR
-            foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
-
-
+        foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
         recDesayunos.adapter  = foodListAdapter
 
         btnAdd.setOnClickListener() {

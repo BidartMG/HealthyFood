@@ -35,7 +35,7 @@ class ListFoodFragment : Fragment() {
     lateinit var btnAdd: FloatingActionButton// // zip
 
     var comidaList: MutableList<Food> = arrayListOf()// zip
-    var desayunoList: MutableList<Food> = arrayListOf()
+
     var colacionesList: MutableList<Food> = arrayListOf()
 
     private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // OJO NO SE USA
@@ -54,7 +54,7 @@ class ListFoodFragment : Fragment() {
         super.onCreate(savedInstanceState)
         // viewModel.initTestList()
         // YA SE CARGARON A BBDD
-        // viewModel.cargarAlm_Cen_Base()
+         //viewModel.cargarAlm_Cen_Base()
 
         // DESAYUNOS
 //        db.collection("desayunosYmeriendas")
@@ -76,6 +76,8 @@ class ListFoodFragment : Fragment() {
                     val myObject = document.toObject(Food::class.java)
                     comidaList.add(myObject)
                 }
+                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}/** ESTO */
+                recComidas.adapter  = foodListAdapter
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
@@ -118,18 +120,6 @@ class ListFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         //var indice = ListFoodFragmentArgs.fromBundle(requireArguments()).index
-
-        // TODO VER POR QUÉ DEMORA EN MOSTRAR
-/*        if(indice == 1) {
-            foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
-        }else if (indice == 2) {
-
-        } else {
-            foodListAdapter = FoodListAdapter(colacionesList,requireContext()){position -> onItemClick(position)}
-        }*/
-        foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}
-
-        recComidas.adapter  = foodListAdapter
 
         btnAdd.setOnClickListener() {
             val goToAddFood = ListFoodFragmentDirections.actionListFoodFragmentToAddFoodFragment()
