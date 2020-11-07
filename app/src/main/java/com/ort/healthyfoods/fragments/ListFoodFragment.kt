@@ -71,18 +71,6 @@ class ListFoodFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
-        // COLACIONES
-        db.collection("colaciones")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val myObject = document.toObject(Food::class.java)
-                    comidaList.add(myObject)
-                }
-            }
-            .addOnFailureListener {exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
-            }
 
     }
     override fun onCreateView(

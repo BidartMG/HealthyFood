@@ -111,4 +111,9 @@
         android:name="com.ort.healthyfoods.fragments.ListRealizadasFragment"
         android:label="list_realizadas_fragment"
         tools:layout="@layout/list_realizadas_fragment" />
+    <fragment
+        android:id="@+id/addSnacksFragment"
+        android:name="com.ort.healthyfoods.fragments.AddSnacksFragment"
+        android:label="fragment_add_snacks"
+        tools:layout="@layout/fragment_add_snacks" />
 </navigation>
