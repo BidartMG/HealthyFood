@@ -56,7 +56,6 @@ class ListFoodFragment : Fragment() {
         // YA SE CARGARON A BBDD
          //viewModel.cargarAlm_Cen_Base()
 
-
         // ALMUERZOS
         db.collection("almuerzosYcenas")
             .get()

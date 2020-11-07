@@ -86,20 +86,7 @@ class AddSnacksFragment : Fragment() {
         }
 
     }
-    /*
-    // COLACIONES
-    db.collection("colaciones")
-    .get()
-    .addOnSuccessListener { result ->
-        for (document in result) {
-            val myObject = document.toObject(Food::class.java)
-            comidaList.add(myObject)
-        }
-    }
-    .addOnFailureListener {exception ->
-        Log.d(ContentValues.TAG, "Error getting documents: ")
-    }
-*/
+
     /**
      * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
      * la variante con dos strings como parámetro para asignar también el título de la ventana

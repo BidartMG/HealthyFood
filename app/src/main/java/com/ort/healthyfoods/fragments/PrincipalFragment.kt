@@ -45,24 +45,21 @@ class PrincipalFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        titleDes.setText("Desayunos y Meriendas")
+        titleDes.setText("Desayunos y Meriendas TUTUT")
         titleCol.setText("Colaciones Saludables")
         titleAlm.setText("Almuerzos y Cenas")
 
         img_desMer.setOnClickListener {
-            //showAlert("ESTOY EN LOS DESAYUNOS Y  MERIENDAS")
             val goToListBreackfast = PrincipalFragmentDirections.actionPrincipalFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToListBreackfast)
         }
-        img_colac.setOnClickListener {
-            //showAlert("ESTOY EN LAS COLACIONES")
+        img_almCen.setOnClickListener {
             val goToListFood = PrincipalFragmentDirections.actionPrincipalFragmentToListFoodFragment()
             vista.findNavController().navigate(goToListFood)
         }
-        img_almCen.setOnClickListener {
-            //showAlert("ESTOY EN LOS ALMUERZOS Y CENAS")
-            val goToListFood = PrincipalFragmentDirections.actionPrincipalFragmentToListFoodFragment()
-            vista.findNavController().navigate(goToListFood)
+        img_colac.setOnClickListener {
+            val goToListSnacks = PrincipalFragmentDirections.actionPrincipalFragmentToListColacionesFragment()
+            vista.findNavController().navigate(goToListSnacks)
         }
     }
 }

@@ -18,6 +18,10 @@ class Food (idComida:Int, nombre:String, descripcion:String, tipoComida:String, 
             val tipoConCarne = "INCLUYE CARNE"
             val tipoVegetariana = "VEGETARIANA"
             val tipoVegana = "VEGANA"
+            val tipoDulce ="DULCE"
+            val tipoSalada = "SALADA"
+            val tipoConTACC = "CONTIENE TACC"
+            val tipoSinTacc = "SIN TACC"
         }
     }
     init {

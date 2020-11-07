@@ -20,82 +20,72 @@ import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.FoodHolder
 
-class ListBreackfastFragment : Fragment() {
-    private lateinit var viewModel: ListBreackfastViewModel // = ListBreackfastViewModel()
+class ListColacionesFragment : Fragment() {
+    private lateinit var viewModel: ListColacionesViewModel
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     lateinit var vista: View
-    lateinit var recDesayunos: RecyclerView
+    lateinit var recColaciones: RecyclerView
     lateinit var btnAdd: FloatingActionButton
 
-    var desayunoList: MutableList<Food> = arrayListOf()
+    var colacionesList: MutableList<Food> = arrayListOf()
 
-    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // TODO ver la utilidad de este adapter
+    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // OJO NO SE USA
 
 
-    // TODO ver si es reciclable el uso de foodListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: FoodListAdapter
 
     companion object {
-        fun newInstance() = ListBreackfastFragment()
+        fun newInstance() = ListColacionesFragment()
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        vista = inflater.inflate(R.layout.list_breackfast_fragment, container, false)
-        btnAdd = vista.findViewById(R.id.btn_add_breackfast)
-        recDesayunos = vista.findViewById(R.id.rec_desayunos_list)
-        recDesayunos.setHasFixedSize(true)
-        linearLayoutManager= LinearLayoutManager(context)
-        recDesayunos.layoutManager = linearLayoutManager
-
+        vista = inflater.inflate(R.layout.list_colaciones_fragment, container, false)
+        btnAdd = vista.findViewById(R.id.btn_add_snack)
+        recColaciones = vista.findViewById(R.id.recColaciones)
+        recColaciones.setHasFixedSize(true)
+        linearLayoutManager = LinearLayoutManager(context)
+        recColaciones.layoutManager = linearLayoutManager
         return vista
     }
-    // Dejo esta llamada para probar
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListBreackfastViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ListColacionesViewModel::class.java)
         // TODO: Use the ViewModel
-        //viewModel.initDesayYMeriendas()
-        //viewModel.cargarDes_Mer_Base()
-        // DESAYUNOS
-        db.collection("desayunosYmeriendas")
+        //viewModel.initColaciones()
+        //viewModel.cargar_Colaciones_Base()
+        // COLACIONES
+        db.collection("colaciones")
             .get()
             .addOnSuccessListener { result ->
-                foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
-                recDesayunos.adapter  = foodListAdapter
+                foodListAdapter = FoodListAdapter(colacionesList,requireContext()){position -> onItemClick(position)}
+                recColaciones.adapter  = foodListAdapter
                 for (document in result) {
                     val myObject = document.toObject(Food::class.java)
-                    desayunoList.add(myObject)
+                    colacionesList.add(myObject)
                 }
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
+
     }
 
     override fun onStart() {
         super.onStart()
+        btnAdd.setOnClickListener {
 
-        btnAdd.setOnClickListener() {
-            val goToAddBreackfast = ListBreackfastFragmentDirections.actionListBreackfastFragmentToAddBreakfastFragment()
-            vista.findNavController().navigate(goToAddBreackfast)
         }
     }
-
-
     fun onItemClick(position:Int) {
-        val goToDetail = ListBreackfastFragmentDirections.actionListBreackfastFragmentToDetailBreakfastFragment(desayunoList[position])
+        val goToDetail = ListBreackfastFragmentDirections.actionListBreackfastFragmentToDetailBreakfastFragment(colacionesList[position])
         vista.findNavController().navigate(goToDetail)
     }
-
-
 
 }
