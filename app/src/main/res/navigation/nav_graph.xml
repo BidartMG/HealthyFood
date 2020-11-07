@@ -86,7 +86,11 @@
         android:id="@+id/addBreakfastFragment"
         android:name="com.ort.healthyfoods.fragments.AddBreakfastFragment"
         android:label="fragment_add_breakfast"
-        tools:layout="@layout/fragment_add_breakfast" />
+        tools:layout="@layout/fragment_add_breakfast" >
+        <action
+            android:id="@+id/action_addBreakfastFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailBreakfastFragment"
         android:name="com.ort.healthyfoods.fragments.DetailBreakfastFragment"

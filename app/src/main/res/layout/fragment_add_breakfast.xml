@@ -7,85 +7,84 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddBreakfastFragment">
 
-    <TextView
-        android:id="@+id/txt_title_add_breackfast"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edt_nombre_desayuno"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_breakfast"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lin_lay_vert_add_breack"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edt_calorias_desayuno"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <LinearLayout
-        android:id="@+id/lin_lay_vert_add_breack"
-        android:layout_width="381dp"
-        android:layout_height="178dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
+    <EditText
+        android:id="@+id/edt_calorias_desayuno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Calorías"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/edt_url_img_desayuno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nombre_desayuno" />
+
+    <EditText
+        android:id="@+id/edt_url_img_desayuno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="UrlImage"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edt_detail_desayuno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_calorias_desayuno" />
+
+    <EditText
+        android:id="@+id/edt_detail_desayuno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Detalle de desayuno"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/lin_lay_horiz_add_breack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_title_add_breackfast">
-
-        <EditText
-            android:id="@+id/edt_nombre_desayuno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/edt_url_img_desayuno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="UrlImage"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/edt_detail_desayuno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Detalle de desayuno"
-            android:inputType="textMultiLine" />
-
-        <EditText
-            android:id="@+id/edt_calorias_desayuno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Calorías"
-            android:inputType="number" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/edt_url_img_desayuno" />
 
     <LinearLayout
         android:id="@+id/lin_lay_horiz_add_breack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lin_lay_vert_add_breack">
+        app:layout_constraintTop_toBottomOf="@+id/edt_detail_desayuno">
 
         <Button
             android:id="@+id/btn_cancel_add_breack"
@@ -107,5 +106,16 @@
             android:text="Aceptar" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="253dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/repostera"
+        app:layout_constraintBottom_toTopOf="@+id/edt_nombre_desayuno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

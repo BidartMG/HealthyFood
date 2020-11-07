@@ -56,18 +56,7 @@ class ListFoodFragment : Fragment() {
         // YA SE CARGARON A BBDD
          //viewModel.cargarAlm_Cen_Base()
 
-        // DESAYUNOS
-//        db.collection("desayunosYmeriendas")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    val myObject = document.toObject(Food::class.java)
-//                    desayunoList.add(myObject)
-//                }
-//            }
-//            .addOnFailureListener {exception ->
-//                Log.d(ContentValues.TAG, "Error getting documents: ")
-//            }
+
         // ALMUERZOS
         db.collection("almuerzosYcenas")
             .get()
