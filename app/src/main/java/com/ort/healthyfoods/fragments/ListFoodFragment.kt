@@ -12,24 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.SnapshotParser
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.google.firebase.ktx.Firebase
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.FoodHolder
 
 class ListFoodFragment : Fragment() {
-    private var viewModel: ListFoodViewModel = ListFoodViewModel() // zip
+    private var viewModel: ListFoodViewModel =
+        ListFoodViewModel() // zip
     lateinit var vista: View // zip
     lateinit var recComidas: RecyclerView// // zip
     lateinit var btnAdd: FloatingActionButton// // zip

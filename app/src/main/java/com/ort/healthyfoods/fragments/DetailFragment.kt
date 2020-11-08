@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import com.ort.healthyfoods.fragments.DetailFragmentArgs
+import com.ort.healthyfoods.fragments.DetailFragmentDirections
 
 
 class DetailFragment : Fragment() {
@@ -52,10 +54,13 @@ class DetailFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        comida = DetailFragmentArgs.fromBundle(requireArguments()).comida// Esta es la comida que quiero guardar si la selecciono
+        comida = DetailFragmentArgs.fromBundle(
+            requireArguments()
+        ).comida// Esta es la comida que quiero guardar si la selecciono
         setupUI()
         btnVolver.setOnClickListener() {// Vuelve a la lista de comidas
-            val valor = DetailFragmentDirections.actionDetailFragmentToListFoodFragment()
+            val valor =
+                DetailFragmentDirections.actionDetailFragmentToListFoodFragment()
             vista.findNavController().navigate(valor)
         }
         btnSeleccionar.setOnClickListener() {
@@ -100,7 +105,7 @@ class DetailFragment : Fragment() {
             }
     }
 
-    private fun showAlert(message:String) {
+     fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Hola")
         builder.setMessage(message)

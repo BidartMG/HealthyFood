@@ -1,7 +1,6 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -58,7 +57,7 @@ class ListBreackfastFragment : Fragment() {
 
         return vista
     }
-    // Dejo esta llamada para probar
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListBreackfastViewModel::class.java)
@@ -79,11 +78,13 @@ class ListBreackfastFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
+
     }
 
     override fun onStart() {
         super.onStart()
 
+        // TODO comprobar que la lista leída no se vuelva a cargar en la vista
         btnAdd.setOnClickListener() {
             val goToAddBreackfast = ListBreackfastFragmentDirections.actionListBreackfastFragmentToAddBreakfastFragment()
             vista.findNavController().navigate(goToAddBreackfast)

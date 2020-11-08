@@ -3,7 +3,6 @@ package com.ort.healthyfoods.fragments
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.entities.Food

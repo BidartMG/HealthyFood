@@ -62,7 +62,9 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener() {
                         if (it.isSuccessful) {
                             val goToPpal = LoginFragmentDirections.actionLoginFragmentToPrincipalFragment()
-                            vista.findNavController().navigate(goToPpal)
+                            //vista.findNavController().navigate(goToPpal)
+                            val goToPresentacion = LoginFragmentDirections.actionLoginFragmentToPresentacionFragment()
+                            vista.findNavController().navigate(goToPresentacion)
                         } else {
                             showAlert()
                         }

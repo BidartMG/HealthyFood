@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
+import com.ort.healthyfoods.enums.ProviderType
 
 
 class RegisterFragment : Fragment() {

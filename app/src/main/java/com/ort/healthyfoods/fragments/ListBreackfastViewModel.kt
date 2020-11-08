@@ -24,28 +24,27 @@ class ListBreackfastViewModel : ViewModel() {
         desayunos.add(Food(56," Huevos revueltos con verduras","Agrega 2 o 3 huevos, aceite de coco o mantequilla, sal, pimienta y verduras (espinacas, cebollas y pimientos). Freír los huevos y las verduras, en un sartén con aceite de coco o mantequilla.",Food.Constants.tipoVegetariana,"https://estaticos.miarevista.es/media/cache/760x570_thumb/uploads/images/recipe/5804f3217781e0aa09555f8d/huevos-revueltos-verduras.jpg",500))
         desayunos.add(Food(57,"Avena con huevos","Hervir la avena, añadir una pizca de sal y pimienta en lugar de azúcar. Posteriormente añade un huevo escalfado y espolvorea un poco de queso por encima",Food.Constants.tipoVegetariana,"https://i.blogs.es/227861/avena-cocida-huevo/1366_2000.jpg",500))
         desayunos.add(Food(58,"Aguacate con pan tostado","El pan tostado junto con el aguacate proporciona fibras. Se le puede añadir,  un huevo o dos y una pizca de levadura nutricional.",Food.Constants.tipoVegana,"https://cdn2.actitudfem.com/media/files/styles/big_img/public/images/2013/09/aguacate_y_pan_tostado.jpg",550))
-
     }
 
     fun cargarDes_Mer_Base() {
         for (elemento in desayunos){
-            comidaPrueba = elemento
-            var newFood = hashMapOf(
-                "idComida" to comidaPrueba.idComida,
-                "nombre" to comidaPrueba.nombre,
-                "tipoComida" to comidaPrueba.tipoComida,
-                "calorias" to comidaPrueba.calorias,
-                "descripcion" to comidaPrueba.descripcion,
-                "urlImagen" to comidaPrueba.urlImagen
-            )
-            db.collection("desayunosYmeriendas")
-                .add(newFood)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}\"La comida se cargó en la BBDD\"")
-                }
-                .addOnFailureListener {
-                        e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
-                }
+                comidaPrueba = elemento
+                var newFood = hashMapOf(
+                    "idComida" to comidaPrueba.idComida,
+                    "nombre" to comidaPrueba.nombre,
+                    "tipoComida" to comidaPrueba.tipoComida,
+                    "calorias" to comidaPrueba.calorias,
+                    "descripcion" to comidaPrueba.descripcion,
+                    "urlImagen" to comidaPrueba.urlImagen
+                )
+                db.collection("desayunosYmeriendas")
+                    .add(newFood)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}\"La comida se cargó en la BBDD\"")
+                    }
+                    .addOnFailureListener {
+                            e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
+                    }
         }
     }
 }
