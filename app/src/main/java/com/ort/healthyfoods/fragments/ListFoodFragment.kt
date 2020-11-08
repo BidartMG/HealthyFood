@@ -52,22 +52,22 @@ class ListFoodFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // viewModel.initTestList()
+         viewModel.initTestList()
         // YA SE CARGARON A BBDD
-        // viewModel.cargarAlm_Cen_Base()
+         viewModel.cargarAlm_Cen_Base()
 
         // DESAYUNOS
-//        db.collection("desayunosYmeriendas")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    val myObject = document.toObject(Food::class.java)
-//                    desayunoList.add(myObject)
-//                }
-//            }
-//            .addOnFailureListener {exception ->
-//                Log.d(ContentValues.TAG, "Error getting documents: ")
-//            }
+        db.collection("desayunosYmeriendas")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val myObject = document.toObject(Food::class.java)
+                    desayunoList.add(myObject)
+                }
+            }
+            .addOnFailureListener {exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ")
+            }
         // ALMUERZOS
         db.collection("almuerzosYcenas")
             .get()
@@ -76,7 +76,10 @@ class ListFoodFragment : Fragment() {
                     val myObject = document.toObject(Food::class.java)
                     comidaList.add(myObject)
                 }
+                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}
+                recComidas.adapter  = foodListAdapter
             }
+
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
@@ -127,9 +130,7 @@ class ListFoodFragment : Fragment() {
         } else {
             foodListAdapter = FoodListAdapter(colacionesList,requireContext()){position -> onItemClick(position)}
         }*/
-        foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}
 
-        recComidas.adapter  = foodListAdapter
 
         btnAdd.setOnClickListener() {
             val goToAddFood = ListFoodFragmentDirections.actionListFoodFragmentToAddFoodFragment()

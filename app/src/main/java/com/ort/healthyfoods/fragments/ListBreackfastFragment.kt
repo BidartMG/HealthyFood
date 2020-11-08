@@ -42,8 +42,8 @@ class ListBreackfastFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // viewModel.initDesayYMeriendas()
-        // viewModel.cargarDes_Mer_Base()
+         viewModel.initDesayYMeriendas()
+         viewModel.cargarDes_Mer_Base()
         // DESAYUNOS
         db.collection("desayunosYmeriendas")
             .get()
