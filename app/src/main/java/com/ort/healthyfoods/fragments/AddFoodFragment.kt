@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
@@ -51,7 +50,7 @@ class AddFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         btnAgregar.setOnClickListener() {
-            agregarComida()
+            agregarComida()// TODO poner logica de verificar que estén todos los campos completos
             clear()
         }
         btnCancelar.setOnClickListener() {
@@ -61,7 +60,7 @@ class AddFoodFragment : Fragment() {
     }
 
     private fun agregarComida() {
-        val comidaPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),10)
+        val comidaPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),calorias.text.toString().toInt())
         val newFood = hashMapOf(
             "idComida" to comidaPrueba.idComida,
             "nombre" to comidaPrueba.nombre,

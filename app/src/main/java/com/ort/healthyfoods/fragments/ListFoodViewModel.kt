@@ -3,7 +3,6 @@ package com.ort.healthyfoods.fragments
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.entities.Food
@@ -31,44 +30,7 @@ class ListFoodViewModel : ViewModel() {
         comidas.add(Food(18,"Milanesas de Soja Rellenas con Queso", "La nueva revolución en milanesas de soja rellenas con muchísimo queso. ¡Super sabrosas y saludables! Para que almuerce toda tu familia.",Food.Constants.tipoVegetariana,"https://www.frizata.com/files/products/5f4fdbc8b6f25-111-1.jpg",1250))
     }
 
-    fun initColaciones () {
-        comidas.add(Food(90,"","","","",150))
-        comidas.add(Food(91,"","","","",150))
-        comidas.add(Food(92,"","","","",150))
-        comidas.add(Food(93,"","","","",150))
-        comidas.add(Food(94,"","","","",150))
-        comidas.add(Food(95,"","","","",150))
-        comidas.add(Food(96,"","","","",150))
-        comidas.add(Food(97,"","","","",150))
-        comidas.add(Food(98,"","","","",150))
-        comidas.add(Food(99,"","","","",150))
-        comidas.add(Food(100,"","","","",150))
-
-    }
-
-     fun cargarAlm_Cen_Base() {
-         for (elemento in comidas){
-             comidaPrueba = elemento
-             var newFood = hashMapOf(
-                 "idComida" to comidaPrueba.idComida,
-                 "nombre" to comidaPrueba.nombre,
-                 "tipoComida" to comidaPrueba.tipoComida,
-                 "calorias" to comidaPrueba.calorias,
-                 "descripcion" to comidaPrueba.descripcion,
-                 "urlImagen" to comidaPrueba.urlImagen
-             )
-            db.collection("almuerzosYcenas")
-                .add(newFood)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}\"La comida se cargó en la BBDD\"")
-                }
-                .addOnFailureListener {
-                        e -> Log.w(TAG, "ERROR writing document", e)
-                }
-         }
-    }
-
-    fun cargar_Colaciones_Base() {
+    fun cargarAlm_Cen_Base() {
         for (elemento in comidas){
             comidaPrueba = elemento
             var newFood = hashMapOf(
@@ -79,7 +41,7 @@ class ListFoodViewModel : ViewModel() {
                 "descripcion" to comidaPrueba.descripcion,
                 "urlImagen" to comidaPrueba.urlImagen
             )
-            db.collection("colaciones")
+            db.collection("almuerzosYcenas")
                 .add(newFood)
                 .addOnSuccessListener { documentReference ->
                     Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}\"La comida se cargó en la BBDD\"")
@@ -89,7 +51,5 @@ class ListFoodViewModel : ViewModel() {
                 }
         }
     }
-
-
 
 }

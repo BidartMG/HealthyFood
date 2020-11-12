@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/principalFragment"
@@ -28,6 +31,9 @@
         <action
             android:id="@+id/action_principalFragment_to_listBreackfastFragment"
             app:destination="@id/listBreackfastFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -63,6 +69,12 @@
         <argument
             android:name="comida"
             app:argType="com.ort.healthyfoods.entities.Food" />
+        <action
+            android:id="@+id/action_detailFragment_to_listFoodFragment"
+            app:destination="@id/listFoodFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_listRealizadasFragment"
+            app:destination="@id/listRealizadasFragment" />
     </fragment>
     <fragment
         android:id="@+id/listBreackfastFragment"
@@ -80,7 +92,11 @@
         android:id="@+id/addBreakfastFragment"
         android:name="com.ort.healthyfoods.fragments.AddBreakfastFragment"
         android:label="fragment_add_breakfast"
-        tools:layout="@layout/fragment_add_breakfast" />
+        tools:layout="@layout/fragment_add_breakfast" >
+        <action
+            android:id="@+id/action_addBreakfastFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailBreakfastFragment"
         android:name="com.ort.healthyfoods.fragments.DetailBreakfastFragment"
@@ -89,5 +105,68 @@
         <argument
             android:name="comida"
             app:argType="com.ort.healthyfoods.entities.Food" />
+        <action
+            android:id="@+id/action_detailBreakfastFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
+        <action
+            android:id="@+id/action_detailBreakfastFragment_to_listRealizadasFragment"
+            app:destination="@id/listRealizadasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listRealizadasFragment"
+        android:name="com.ort.healthyfoods.fragments.ListRealizadasFragment"
+        android:label="list_realizadas_fragment"
+        tools:layout="@layout/list_realizadas_fragment" >
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSnacksFragment"
+        android:name="com.ort.healthyfoods.fragments.AddSnacksFragment"
+        android:label="fragment_add_snacks"
+        tools:layout="@layout/fragment_add_snacks" >
+        <action
+            android:id="@+id/action_addSnacksFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listColacionesFragment"
+        android:name="com.ort.healthyfoods.fragments.ListColacionesFragment"
+        android:label="list_colaciones_fragment"
+        tools:layout="@layout/list_colaciones_fragment" >
+        <action
+            android:id="@+id/action_listColacionesFragment_to_detailSnackFragment"
+            app:destination="@id/detailSnackFragment" />
+        <action
+            android:id="@+id/action_listColacionesFragment_to_addSnacksFragment"
+            app:destination="@id/addSnacksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailSnackFragment"
+        android:name="com.ort.healthyfoods.fragments.DetailSnackFragment"
+        android:label="fragment_detail_snack"
+        tools:layout="@layout/fragment_detail_snack" >
+        <action
+            android:id="@+id/action_detailSnackFragment_to_listRealizadasFragment"
+            app:destination="@id/listRealizadasFragment" />
+        <argument
+            android:name="snack"
+            app:argType="com.ort.healthyfoods.entities.Food" />
+    </fragment>
+    <fragment
+        android:id="@+id/presentacionFragment"
+        android:name="com.ort.healthyfoods.fragments.PresentacionFragment"
+        android:label="fragment_presentacion"
+        tools:layout="@layout/fragment_presentacion" >
+        <action
+            android:id="@+id/action_presentacionFragment_to_listRealizadasFragment"
+            app:destination="@id/listRealizadasFragment" />
+        <action
+            android:id="@+id/action_presentacionFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
     </fragment>
 </navigation>

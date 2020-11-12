@@ -12,30 +12,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.SnapshotParser
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.google.firebase.ktx.Firebase
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.FoodHolder
 
 class ListFoodFragment : Fragment() {
-    private var viewModel: ListFoodViewModel = ListFoodViewModel() // zip
+    private var viewModel: ListFoodViewModel =
+        ListFoodViewModel() // zip
     lateinit var vista: View // zip
     lateinit var recComidas: RecyclerView// // zip
     lateinit var btnAdd: FloatingActionButton// // zip
 
     var comidaList: MutableList<Food> = arrayListOf()// zip
-    var desayunoList: MutableList<Food> = arrayListOf()
+
     var colacionesList: MutableList<Food> = arrayListOf()
 
     private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // OJO NO SE USA
@@ -53,21 +48,9 @@ class ListFoodFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          viewModel.initTestList()
-        // YA SE CARGARON A BBDD
-         viewModel.cargarAlm_Cen_Base()
 
-        // DESAYUNOS
-        db.collection("desayunosYmeriendas")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val myObject = document.toObject(Food::class.java)
-                    desayunoList.add(myObject)
-                }
-            }
-            .addOnFailureListener {exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
-            }
+         //viewModel.cargarAlm_Cen_Base()
+
         // ALMUERZOS
         db.collection("almuerzosYcenas")
             .get()
@@ -76,21 +59,10 @@ class ListFoodFragment : Fragment() {
                     val myObject = document.toObject(Food::class.java)
                     comidaList.add(myObject)
                 }
-                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}
-                recComidas.adapter  = foodListAdapter
-            }
 
-            .addOnFailureListener {exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
-            }
-        // COLACIONES
-        db.collection("colaciones")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val myObject = document.toObject(Food::class.java)
-                    comidaList.add(myObject)
-                }
+                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}/** ESTO */
+                recComidas.adapter  = foodListAdapter
+
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
@@ -121,15 +93,6 @@ class ListFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         //var indice = ListFoodFragmentArgs.fromBundle(requireArguments()).index
-
-        // TODO VER POR QUÉ DEMORA EN MOSTRAR
-/*        if(indice == 1) {
-            foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
-        }else if (indice == 2) {
-
-        } else {
-            foodListAdapter = FoodListAdapter(colacionesList,requireContext()){position -> onItemClick(position)}
-        }*/
 
 
         btnAdd.setOnClickListener() {

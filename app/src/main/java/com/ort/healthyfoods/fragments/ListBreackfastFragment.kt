@@ -1,7 +1,6 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,18 +20,19 @@ import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.FoodHolder
 
 class ListBreackfastFragment : Fragment() {
-    private var viewModel: ListBreackfastViewModel = ListBreackfastViewModel()
-    lateinit var vista: View // zip
+    private lateinit var viewModel: ListBreackfastViewModel // = ListBreackfastViewModel()
+    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    lateinit var vista: View
     lateinit var recDesayunos: RecyclerView
     lateinit var btnAdd: FloatingActionButton
 
     var desayunoList: MutableList<Food> = arrayListOf()
 
-    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // NO SE USA
+    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // TODO ver la utilidad de este adapter
 
-    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    //ver que onda estas dos siguientes
+    // TODO ver si es reciclable el uso de foodListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: FoodListAdapter
 
@@ -40,23 +40,10 @@ class ListBreackfastFragment : Fragment() {
         fun newInstance() = ListBreackfastFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-         viewModel.initDesayYMeriendas()
-         viewModel.cargarDes_Mer_Base()
-        // DESAYUNOS
-        db.collection("desayunosYmeriendas")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val myObject = document.toObject(Food::class.java)
-                    desayunoList.add(myObject)
-                }
-            }
-            .addOnFailureListener {exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
-            }
-    }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,21 +58,34 @@ class ListBreackfastFragment : Fragment() {
 
         return vista
     }
-    // Dejo esta llamada para probar
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListBreackfastViewModel::class.java)
         // TODO: Use the ViewModel
+        //viewModel.initDesayYMeriendas()
+        //viewModel.cargarDes_Mer_Base()
+        // DESAYUNOS
+        db.collection("desayunosYmeriendas")
+            .get()
+            .addOnSuccessListener { result ->
+                foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
+                recDesayunos.adapter  = foodListAdapter
+                for (document in result) {
+                    val myObject = document.toObject(Food::class.java)
+                    desayunoList.add(myObject)
+                }
+            }
+            .addOnFailureListener {exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ")
+            }
+
     }
 
     override fun onStart() {
         super.onStart()
-        // TODO VER POR QUÉ DEMORA EN MOSTRAR
-            foodListAdapter = FoodListAdapter(desayunoList,requireContext()){position -> onItemClick(position)}
 
-
-        recDesayunos.adapter  = foodListAdapter
-
+        // TODO comprobar que la lista leída no se vuelva a cargar en la vista
         btnAdd.setOnClickListener() {
             val goToAddBreackfast = ListBreackfastFragmentDirections.actionListBreackfastFragmentToAddBreakfastFragment()
             vista.findNavController().navigate(goToAddBreackfast)

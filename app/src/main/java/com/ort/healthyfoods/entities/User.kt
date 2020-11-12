@@ -3,6 +3,11 @@ package com.ort.healthyfoods.entities
 import android.os.Parcel
 import android.os.Parcelable
 
+// TODO en el registro, dar bienvenida a la aplicación con una pantalla - armar un perfil con objetivos.
+//  Test de registrar nuevo usuario OK
+//  Test de logueo de distintos usuarios registrados en la base
+//  Ver cómo recuperar o guardar identificador del usuario para acceder a sus comidasRealizadas
+
 class User (idUsuario:Int, nombre:String, apellido:String, email:String, telefono:String, password:String) : Parcelable {
     var idUsuario: Int
     var nombre: String
