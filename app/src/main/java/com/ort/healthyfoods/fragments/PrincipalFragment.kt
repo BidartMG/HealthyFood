@@ -45,7 +45,7 @@ class PrincipalFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        titleDes.setText("Desayunos y Meriendas TUTUT")
+        titleDes.setText("Desayunos y Meriendas")
         titleCol.setText("Colaciones Saludables")
         titleAlm.setText("Almuerzos y Cenas")
 

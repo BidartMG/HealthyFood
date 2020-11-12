@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -60,6 +61,30 @@ class ListRealizadasFragment : Fragment() {
         recRealizadas.setHasFixedSize(true)
         linearLayoutManager= LinearLayoutManager(context)
         recRealizadas.layoutManager = linearLayoutManager
+        val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+
+        db.collection("comidasRealizadas")
+            .whereEqualTo("usuario", usuario)
+            .get()
+            .addOnSuccessListener { result ->
+                //realizadasListAdapter = FoodListAdapter(comidasRealizadasList,requireContext()){position -> onItemClick(position)}
+                //recRealizadas.adapter  = realizadasListAdapter
+                for (document in result) {
+                    val myObject = document.toObject(Food::class.java)
+                    comidasRealizadasList.add(myObject)
+                    acumuladorCalorias += myObject.calorias
+                }
+                caloriasConsumidas.setText(acumuladorCalorias.toString())
+
+                //caloriasConsumidas.setText(acumuladorCalorias.toString() + "*************")
+                // Cargar en los TextView los datos acumulados de calorias consumidas
+                caloriasSemanales.setText("Estas dentro del límite semanal")
+
+
+            }
+            .addOnFailureListener {exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ")
+            }
 
         return vista
     }
@@ -68,22 +93,22 @@ class ListRealizadasFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListRealizadasViewModel::class.java)
         // TODO: Use the ViewModel -  Ver de ponerlo sino en onCreate
-        db.collection("comidasRealizadas")
+        /*db.collection("comidasRealizadas")
             .get()
             .addOnSuccessListener { result ->
                 realizadasListAdapter = FoodListAdapter(comidasRealizadasList,requireContext()){position -> onItemClick(position)}
                 recRealizadas.adapter  = realizadasListAdapter
                 for (document in result) {
                     val myObject = document.toObject(Food::class.java)
-                    acumuladorCalorias = acumuladorCalorias + myObject.calorias.toInt()
                     comidasRealizadasList.add(myObject)
+                    acumuladorCalorias += myObject.calorias
+
                 }
-                caloriasConsumidas.setText(acumuladorCalorias.toString() + " calorias")
 
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
-            }
+            }*/
 
 
     }
@@ -91,11 +116,9 @@ class ListRealizadasFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        // Cargar en los TextView los datos acumulados de calorias consumidas
-
 
         btnVolver.setOnClickListener {
-            //val goToPpal: ListRealizadasFragmentDirections.
+            //val goToPresentacion: ListRealizadasFragmentDirections.
         }
 
     }

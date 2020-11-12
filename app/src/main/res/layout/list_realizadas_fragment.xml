@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Calorias Consumidas Semana"
             android:inputType="textPersonName"
             android:text="Calorias Consumidas:" />
 
@@ -51,7 +52,7 @@
             android:id="@+id/btn_volver_realizadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:text="Volver a Principal" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,7 +1,9 @@
 package com.ort.healthyfoods.fragments
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +24,9 @@ class LoginFragment : Fragment() {
     lateinit var password: EditText
     lateinit var btnAceptar: Button
     lateinit var btnRegister: Button
+    //TODO TODO
+    val PREF_NAME = "myPreferences"
+
 
     private lateinit var auth: FirebaseAuth
 
@@ -50,6 +55,10 @@ class LoginFragment : Fragment() {
         val currentUser = auth.currentUser
         //updateUI(currentUser) Verificar esta función
 
+        val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+
         btnRegister.setOnClickListener() {
             clear()
             val goToRegister = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()
@@ -57,6 +66,13 @@ class LoginFragment : Fragment() {
         }
         btnAceptar.setOnClickListener() {
             if (usuario.text.isNotEmpty() && password.text.isNotEmpty()) {
+                if(!usuario.text.isNotEmpty()) {
+                    editor.putString("USER", "ERROR") // REVISAR el Else
+                }
+                editor.putString("USER", usuario.text.toString())
+
+                editor.apply()
+
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(usuario.text.toString(),password.text.toString())
                     .addOnCompleteListener() {

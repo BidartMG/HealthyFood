@@ -73,6 +73,7 @@ class RegisterFragment : Fragment() {
                     "email" to email.text.toString(),
                     "telefono" to telefono.text.toString(),
                     "password" to password.text.toString()) // idem, verificar si es seguro guardarlo en la base
+
             )
             limpiarEditTexts()
         }

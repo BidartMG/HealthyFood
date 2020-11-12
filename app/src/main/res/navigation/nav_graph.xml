@@ -120,6 +120,9 @@
         <action
             android:id="@+id/action_listRealizadasFragment_to_principalFragment"
             app:destination="@id/principalFragment" />
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSnacksFragment"
@@ -162,5 +165,8 @@
         <action
             android:id="@+id/action_presentacionFragment_to_listRealizadasFragment"
             app:destination="@id/listRealizadasFragment" />
+        <action
+            android:id="@+id/action_presentacionFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
     </fragment>
 </navigation>
