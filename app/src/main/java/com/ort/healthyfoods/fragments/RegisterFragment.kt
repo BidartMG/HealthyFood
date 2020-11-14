@@ -98,8 +98,8 @@ class RegisterFragment : Fragment() {
                     )
                     .addOnCompleteListener() {
                         if (it.isSuccessful) {
-                            val goToPrincipal = RegisterFragmentDirections.actionRegisterFragmentToPrincipalFragment()
-                            vista.findNavController().navigate(goToPrincipal)
+                            val goToPresentacion = RegisterFragmentDirections.actionRegisterFragmentToPresentacionFragment()
+                            vista.findNavController().navigate(goToPresentacion)
                         } else {
                             showAlert("Se ha producido un error autenticando al usuario'<br/>' Email ya registrado o Usuario inexistente!")
                         }
@@ -120,7 +120,5 @@ class RegisterFragment : Fragment() {
     private fun inputsIsNotEmpty() : Boolean{
         return (nombre.text.isNotEmpty() && apellido.text.isNotEmpty() && telefono.text.isNotEmpty())
     }
-    /*
 
-    */
 }

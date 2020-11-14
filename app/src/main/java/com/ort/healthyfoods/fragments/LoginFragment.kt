@@ -24,10 +24,8 @@ class LoginFragment : Fragment() {
     lateinit var password: EditText
     lateinit var btnAceptar: Button
     lateinit var btnRegister: Button
-    //TODO TODO
+
     val PREF_NAME = "myPreferences"
-
-
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,11 +51,10 @@ class LoginFragment : Fragment() {
         auth = Firebase.auth
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        //updateUI(currentUser) Verificar esta función
+        //updateUI(currentUser)
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-
 
         btnRegister.setOnClickListener() {
             clear()
@@ -70,15 +67,12 @@ class LoginFragment : Fragment() {
                     editor.putString("USER", "ERROR") // REVISAR el Else
                 }
                 editor.putString("USER", usuario.text.toString())
-
                 editor.apply()
 
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(usuario.text.toString(),password.text.toString())
                     .addOnCompleteListener() {
                         if (it.isSuccessful) {
-                            val goToPpal = LoginFragmentDirections.actionLoginFragmentToPrincipalFragment()
-                            //vista.findNavController().navigate(goToPpal)
                             val goToPresentacion = LoginFragmentDirections.actionLoginFragmentToPresentacionFragment()
                             vista.findNavController().navigate(goToPresentacion)
                         } else {
@@ -91,7 +85,7 @@ class LoginFragment : Fragment() {
     private fun showAlert() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
+        builder.setMessage("Usuario Inválido")
         builder.setPositiveButton("Aceptar",null)
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
         dialog.show()
@@ -101,4 +95,5 @@ class LoginFragment : Fragment() {
         password.setText("")
 
     }
+    // TODO showTips()
 }
