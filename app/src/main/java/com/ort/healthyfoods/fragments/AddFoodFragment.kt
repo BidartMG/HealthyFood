@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
@@ -51,10 +52,13 @@ class AddFoodFragment : Fragment() {
         super.onStart()
         btnAgregar.setOnClickListener() {
             agregarComida()// TODO poner logica de verificar que estén todos los campos completos
-            clear()
+            //clear()
+            vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
+
         }
         btnCancelar.setOnClickListener() {
             clear()
+            vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
         }
 
     }

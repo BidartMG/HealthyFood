@@ -17,6 +17,8 @@ import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.User
 import com.ort.healthyfoods.fragments.DetailFragmentArgs
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class DetailBreakfastFragment : Fragment() {
@@ -87,7 +89,8 @@ class DetailBreakfastFragment : Fragment() {
             "tipoComida" to comidaRealizada.tipoComida,
             "calorias" to comidaRealizada.calorias,
             "descripcion" to comidaRealizada.descripcion,
-            "urlImagen" to comidaRealizada.urlImagen
+            "urlImagen" to comidaRealizada.urlImagen,
+            "fechaRealizada" to Timestamp.from(Instant.now())
         )
         db.collection("comidasRealizadas")
             .add(newFood)

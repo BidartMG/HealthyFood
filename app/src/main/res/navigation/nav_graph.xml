@@ -48,7 +48,11 @@
         android:id="@+id/addFoodFragment"
         android:name="com.ort.healthyfoods.fragments.AddFoodFragment"
         android:label="fragment_add_food"
-        tools:layout="@layout/fragment_add_food" />
+        tools:layout="@layout/fragment_add_food" >
+        <action
+            android:id="@+id/action_addFoodFragment_to_listFoodFragment"
+            app:destination="@id/listFoodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/listFoodFragment"
         android:name="com.ort.healthyfoods.fragments.ListFoodFragment"

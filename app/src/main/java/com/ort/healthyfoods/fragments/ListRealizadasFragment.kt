@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -118,7 +119,8 @@ class ListRealizadasFragment : Fragment() {
 
 
         btnVolver.setOnClickListener {
-            //val goToPresentacion: ListRealizadasFragmentDirections.
+            vista.findNavController().navigate(R.id.action_listRealizadasFragment_to_principalFragment)
+
         }
 
     }

@@ -19,6 +19,8 @@ import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.User
 import com.ort.healthyfoods.fragments.DetailFragmentArgs
 import com.ort.healthyfoods.fragments.DetailFragmentDirections
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class DetailFragment : Fragment() {
@@ -76,6 +78,10 @@ class DetailFragment : Fragment() {
             vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListRealizadasFragment())
 
         }
+        btnVolver.setOnClickListener() {
+            vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListFoodFragment())
+        }
+
     }
 
     private fun setupUI () {
@@ -101,7 +107,9 @@ class DetailFragment : Fragment() {
             "tipoComida" to comidaRealizada.tipoComida,
             "calorias" to comidaRealizada.calorias,
             "descripcion" to comidaRealizada.descripcion,
-            "urlImagen" to comidaRealizada.urlImagen
+            "urlImagen" to comidaRealizada.urlImagen,
+            "fechaRealizada" to Timestamp.from(Instant.now())
+
 
         )
         db.collection("comidasRealizadas")
