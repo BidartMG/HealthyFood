@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
@@ -51,9 +52,26 @@ class AddFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         btnAgregar.setOnClickListener() {
-            agregarComida()// TODO poner logica de verificar que estén todos los campos completos
-            //clear()
-            vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
+            if(nombre.text.toString().isEmpty()) {
+                nombre.error = "Campo 'Nombre' no puede ser vacío"
+                nombre.requestFocus()
+            } else if (calorias.text.toString().isEmpty()){
+                calorias.error = "Campo 'Calorias' no puede ser vacío"
+                calorias.requestFocus()
+            } else if (descripcion.text.toString().isEmpty()) {
+                descripcion.error = "Campo 'Descripción' no puede ser vacío"
+                descripcion.requestFocus()
+            } else if (tipoComida.text.toString().isEmpty()) {
+                tipoComida.error = "Campo 'Tipo comida' no puede ser vacío"
+                tipoComida.requestFocus()
+            } else if (urlImagen.text.toString().isEmpty()) {
+                urlImagen.error = "Campo 'Url Imagen' no puede ser vacío"
+                urlImagen.requestFocus()
+            } else {
+                agregarComida()
+                //clear()
+                vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
+            }
 
         }
         btnCancelar.setOnClickListener() {

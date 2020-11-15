@@ -49,7 +49,6 @@ class AddBreakfastFragment : Fragment() {
         }
         btnCancelar.setOnClickListener {
             clear()
-            // TODO ver si quiero redirigir a principal o anterior
             val goToBack = AddBreakfastFragmentDirections.actionAddBreakfastFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToBack)
         }
