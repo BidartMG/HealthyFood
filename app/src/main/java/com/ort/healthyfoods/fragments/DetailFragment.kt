@@ -74,9 +74,6 @@ class DetailFragment : Fragment() {
         btnSeleccionar.setOnClickListener() {
 // Tenemos que guardar la referencia de la comida para cargarla en la lista de mis comidas
             agregarComidaRealizadaABase()
-            // TODO Esto después se tiene que mover a otro acceso
-            vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListRealizadasFragment())
-
         }
         btnVolver.setOnClickListener() {
             vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListFoodFragment())

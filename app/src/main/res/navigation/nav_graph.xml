@@ -11,9 +11,6 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_principalFragment"
-            app:destination="@id/principalFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
         <action
@@ -24,25 +21,15 @@
         android:id="@+id/principalFragment"
         android:name="com.ort.healthyfoods.fragments.PrincipalFragment"
         android:label="fragment_principal"
-        tools:layout="@layout/fragment_principal" >
-        <action
-            android:id="@+id/action_principalFragment_to_listFoodFragment"
-            app:destination="@id/listFoodFragment" />
-        <action
-            android:id="@+id/action_principalFragment_to_listBreackfastFragment"
-            app:destination="@id/listBreackfastFragment" />
-        <action
-            android:id="@+id/action_principalFragment_to_listColacionesFragment"
-            app:destination="@id/listColacionesFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_principal" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.ort.healthyfoods.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_registerFragment_to_principalFragment"
-            app:destination="@id/principalFragment" />
+            android:id="@+id/action_registerFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
@@ -76,9 +63,6 @@
         <action
             android:id="@+id/action_detailFragment_to_listFoodFragment"
             app:destination="@id/listFoodFragment" />
-        <action
-            android:id="@+id/action_detailFragment_to_listRealizadasFragment"
-            app:destination="@id/listRealizadasFragment" />
     </fragment>
     <fragment
         android:id="@+id/listBreackfastFragment"
@@ -112,22 +96,12 @@
         <action
             android:id="@+id/action_detailBreakfastFragment_to_listBreackfastFragment"
             app:destination="@id/listBreackfastFragment" />
-        <action
-            android:id="@+id/action_detailBreakfastFragment_to_listRealizadasFragment"
-            app:destination="@id/listRealizadasFragment" />
     </fragment>
     <fragment
         android:id="@+id/listRealizadasFragment"
         android:name="com.ort.healthyfoods.fragments.ListRealizadasFragment"
         android:label="list_realizadas_fragment"
-        tools:layout="@layout/list_realizadas_fragment" >
-        <action
-            android:id="@+id/action_listRealizadasFragment_to_principalFragment"
-            app:destination="@id/principalFragment" />
-        <action
-            android:id="@+id/action_listRealizadasFragment_to_presentacionFragment"
-            app:destination="@id/presentacionFragment" />
-    </fragment>
+        tools:layout="@layout/list_realizadas_fragment" />
     <fragment
         android:id="@+id/addSnacksFragment"
         android:name="com.ort.healthyfoods.fragments.AddSnacksFragment"
@@ -154,9 +128,6 @@
         android:name="com.ort.healthyfoods.fragments.DetailSnackFragment"
         android:label="fragment_detail_snack"
         tools:layout="@layout/fragment_detail_snack" >
-        <action
-            android:id="@+id/action_detailSnackFragment_to_listRealizadasFragment"
-            app:destination="@id/listRealizadasFragment" />
         <argument
             android:name="snack"
             app:argType="com.ort.healthyfoods.entities.Food" />
@@ -167,10 +138,18 @@
         android:label="fragment_presentacion"
         tools:layout="@layout/fragment_presentacion" >
         <action
-            android:id="@+id/action_presentacionFragment_to_listRealizadasFragment"
-            app:destination="@id/listRealizadasFragment" />
+            android:id="@+id/action_presentacionFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
         <action
-            android:id="@+id/action_presentacionFragment_to_principalFragment"
-            app:destination="@id/principalFragment" />
+            android:id="@+id/action_presentacionFragment_to_listFoodFragment"
+            app:destination="@id/listFoodFragment" />
+        <action
+            android:id="@+id/action_presentacionFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/misDatosFragment"
+        android:name="com.ort.healthyfoods.fragments.MisDatosFragment"
+        android:label="mis_datos_fragment"
+        tools:layout="@layout/mis_datos_fragment" />
 </navigation>

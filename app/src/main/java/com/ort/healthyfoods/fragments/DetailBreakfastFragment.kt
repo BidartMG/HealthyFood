@@ -64,8 +64,6 @@ class DetailBreakfastFragment : Fragment() {
         }
         btnSeleccionar.setOnClickListener {
             agregarComidaRealizadaABase()
-            val goToRealizadasList = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListRealizadasFragment()
-            vista.findNavController().navigate(goToRealizadasList)
 
         }
     }
