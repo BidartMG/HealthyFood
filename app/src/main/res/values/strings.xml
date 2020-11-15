@@ -21,7 +21,9 @@
     <string name="shr_logo_content_description">Imagen Logo Chef</string>
 
 
-
+    <string name="objetivo_cal">Objetivo Calorias Semanales: </string>
+    <string name="edt_cal_cons">Calorias Consumidas: </string>
+    <string name="btn_realizadas">Ver Mis Comidas</string>
     <string name="button_next">Next</string>
     <string name="button_cancel">Cancel</string>
 

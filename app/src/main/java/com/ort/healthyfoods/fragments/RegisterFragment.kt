@@ -18,7 +18,6 @@ import com.ort.healthyfoods.enums.ProviderType
 class RegisterFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var vista: View
-
     lateinit var titulo: TextView
     lateinit var nombre: EditText
     lateinit var apellido: EditText
@@ -33,14 +32,12 @@ class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_register, container, false)
         titulo = vista.findViewById(R.id.txt_tittle_register)
         nombre = vista.findViewById(R.id.edt_name_register)
@@ -72,8 +69,7 @@ class RegisterFragment : Fragment() {
                     "apellido" to apellido.text.toString(),
                     "email" to email.text.toString(),
                     "telefono" to telefono.text.toString(),
-                    "password" to password.text.toString()) // idem, verificar si es seguro guardarlo en la base
-
+                    "password" to password.text.toString())
             )
             limpiarEditTexts()
         }
