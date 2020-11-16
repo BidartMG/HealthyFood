@@ -18,7 +18,6 @@ import com.ort.healthyfoods.entities.Food
 class AddBreakfastFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var vista: View
-
     lateinit var nombre: EditText
     lateinit var calorias: EditText
     lateinit var descripcion: EditText
@@ -38,18 +37,19 @@ class AddBreakfastFragment : Fragment() {
         urlImagen = vista.findViewById(R.id.edt_url_img_desayuno)
         btnAgregar = vista.findViewById(R.id.btn_accept_add_breack)
         btnCancelar = vista.findViewById(R.id.btn_cancel_add_breack)
-
         return vista
     }
+
     override fun onStart() {
         super.onStart()
+
         btnAgregar.setOnClickListener {
             agregarDesayuno()
             clear()
         }
+
         btnCancelar.setOnClickListener {
             clear()
-            // TODO ver si quiero redirigir a principal o anterior
             val goToBack = AddBreakfastFragmentDirections.actionAddBreakfastFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToBack)
         }
@@ -64,7 +64,7 @@ class AddBreakfastFragment : Fragment() {
     // repetidos.
     private fun agregarDesayuno() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
-            val desayunoPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
+            val desayunoPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
             val newFood = hashMapOf(
                 "idComida" to desayunoPrueba.idComida,
                 "nombre" to desayunoPrueba.nombre,
@@ -90,8 +90,7 @@ class AddBreakfastFragment : Fragment() {
     }
 
     /**
-     * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
-     * la variante con dos strings como parámetro para asignar también el título de la ventana
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())

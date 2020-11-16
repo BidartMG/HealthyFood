@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
@@ -37,7 +38,6 @@ class AddSnacksFragment : Fragment() {
         urlImagen = vista.findViewById(R.id.edt_urlImagen_snack)
         btnCancelar = vista.findViewById(R.id.btn_cancel_snack)
         btnAgregar = vista.findViewById(R.id.btn_add_snack)
-
         return vista
     }
 
@@ -50,6 +50,8 @@ class AddSnacksFragment : Fragment() {
         }
         btnCancelar.setOnClickListener {
             clear()
+            val goToBack = AddSnacksFragmentDirections.actionAddSnacksFragmentToListColacionesFragment()
+            vista.findNavController().navigate(goToBack)
         }
     }
 
@@ -58,10 +60,8 @@ class AddSnacksFragment : Fragment() {
      * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
      * base de datos correspondiente, caso contrario emite un alerta avisando..
      */
-    //TODO verificar que el identificador sea único y se autoincremente, validar que no haya platos
-    // repetidos.
     private fun agregarColación() {
-        if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {//////
+        if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
             val colacion = Food(525600,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
             val newFood = hashMapOf(
                 "idComida" to colacion.idComida,
@@ -88,8 +88,7 @@ class AddSnacksFragment : Fragment() {
     }
 
     /**
-     * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
-     * la variante con dos strings como parámetro para asignar también el título de la ventana
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())

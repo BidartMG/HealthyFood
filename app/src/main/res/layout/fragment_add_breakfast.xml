@@ -14,14 +14,15 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:autofillHints="@string/autofillHintsName"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/name_food"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edt_calorias_desayuno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/img_desayuno" />
 
     <EditText
         android:id="@+id/edt_calorias_desayuno"
@@ -30,8 +31,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:autofillHints="son las calorías que contiene el plato"
         android:ems="10"
-        android:hint="Calorías"
+        android:hint="@string/calorias_food"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/edt_url_img_desayuno"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +48,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:autofillHints="es la url de la imagen que representa el alimento"
         android:ems="10"
-        android:hint="UrlImage"
-        android:inputType="textPersonName"
+        android:hint="@string/url"
+        android:inputType="textUri|textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edt_detail_desayuno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -62,9 +65,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:autofillHints="detalle de como se compone el alimento"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Detalle de desayuno"
+        android:hint="@string/detail_food"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/lin_lay_horiz_add_breack"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,15 +110,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:text="@string/button_next" />
+            android:text="@string/add_food" />
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_desayuno"
         android:layout_width="253dp"
         android:layout_height="164dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/imagen_layout"
         android:src="@drawable/repostera"
         app:layout_constraintBottom_toTopOf="@+id/edt_nombre_desayuno"
         app:layout_constraintEnd_toEndOf="parent"

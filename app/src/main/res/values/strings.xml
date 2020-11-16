@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Healthy foods</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="name_food">Nombre</string>
+    <string name="calorias_food">Calorias</string>
+    <string name="detail_food">Detalle</string>
+    <string name="url">Url Imagen</string>
+    <string name="imagen_layout">imagen que representa el layout</string>
+    <string name="autofillHintsName">Es el nombre del alimento</string>
+    <string name="autofillHintsUrl">Es la url de la imagen de food</string>
+
+    <string name="contentDesc">Imagen que representa el layout</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="titleDes">"Desayunos y Meriendas"</string>
     <string name="titleCol">"Colaciones Saludables"</string>
@@ -15,16 +25,14 @@
 
     <string name="register">Complete sus Datos</string>
 
-    <string name="add_food">Agregar comida</string>
-    <string name="add_breakfast">Agregar</string>
-    <string name="add_snack">Agregar</string>
+    <string name="add_food">Agregar</string>
     <string name="shr_logo_content_description">Imagen Logo Chef</string>
 
 
     <string name="objetivo_cal">Objetivo Calorias Semanales: </string>
     <string name="edt_cal_cons">Calorias Consumidas: </string>
     <string name="btn_realizadas">Ver Mis Comidas</string>
-    <string name="button_next">Next</string>
-    <string name="button_cancel">Cancel</string>
+    <string name="button_next">siguiente</string>
+    <string name="button_cancel">Cancelar</string>
 
 </resources>

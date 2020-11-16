@@ -8,11 +8,13 @@
     tools:context=".fragments.AddSnacksFragment">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/img_chef_colac"
         android:layout_width="262dp"
         android:layout_height="316dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints="@string/autofillHintsUrl"
+        android:contentDescription="@string/imagen_layout"
         android:src="@drawable/chef_cartel"
         app:layout_constraintBottom_toTopOf="@+id/edt_name_snack"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,13 +28,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="@string/autofillHintsName"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/name_food"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edt_calorias_snack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/img_chef_colac" />
 
     <EditText
         android:id="@+id/edt_calorias_snack"
@@ -40,8 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="son las calorías que contiene el plato"
         android:ems="10"
-        android:hint="Calorías"
+        android:hint="@string/calorias_food"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edt_urlImagen_snack"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,9 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="@string/autofillHintsUrl"
         android:ems="10"
-        android:hint="UrlImagen"
-        android:inputType="textPersonName"
+        android:hint="@string/url"
+        android:inputType="textUri|textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edt_descrip_snack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="detalle de como se compone el alimento"
         android:ems="10"
-        android:hint="Descripción"
+        android:hint="@string/detail_food"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:background="@color/colorAccent"
+            android:text="@string/button_cancel" />
 
         <Space
             android:layout_width="8dp"
@@ -107,7 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/add_snack" />
+            android:background="@color/colorPrimary"
+            android:text="@string/add_food" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
