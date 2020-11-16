@@ -34,5 +34,8 @@
     <string name="btn_realizadas">Ver Mis Comidas</string>
     <string name="button_next">siguiente</string>
     <string name="button_cancel">Cancelar</string>
+    <string name="button_volver">Volver</string>
+    <string name="button_add">Seleccionar</string>
+
 
 </resources>

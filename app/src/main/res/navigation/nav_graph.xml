@@ -131,6 +131,9 @@
         <argument
             android:name="snack"
             app:argType="com.ort.healthyfoods.entities.Food" />
+        <action
+            android:id="@+id/action_detailSnackFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
     </fragment>
     <fragment
         android:id="@+id/presentacionFragment"

@@ -16,24 +16,18 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
-import com.ort.healthyfoods.entities.User
-import com.ort.healthyfoods.fragments.DetailFragmentArgs
-import com.ort.healthyfoods.fragments.DetailFragmentDirections
-
 
 class DetailFragment : Fragment() {
     private lateinit var vista: View
-
-
-    lateinit var image: ImageView
+    private lateinit var image: ImageView
     private lateinit var titulo: TextView
     private lateinit var calorias: TextView
     private lateinit var tipoComida: TextView
     private lateinit var descripcion: TextView
-    private lateinit var comida: Food
     private lateinit var btnVolver: Button
     private lateinit var btnSeleccionar: Button
 
+    private lateinit var comida: Food
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +38,6 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_detail, container, false)
         image = vista.findViewById(R.id.img_detail_food)
         titulo = vista.findViewById(R.id.txt_name_item_food)
@@ -58,19 +51,13 @@ class DetailFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        //var user : String =
-
-        comida = DetailFragmentArgs.fromBundle(
-            requireArguments()
-        ).comida// Esta es la comida que quiero guardar si la selecciono
+        comida = DetailFragmentArgs.fromBundle(requireArguments()).comida
         setupUI()
-        btnVolver.setOnClickListener() {// Vuelve a la lista de comidas
-            val valor =
-                DetailFragmentDirections.actionDetailFragmentToListFoodFragment()
+        btnVolver.setOnClickListener() {
+            val valor = DetailFragmentDirections.actionDetailFragmentToListFoodFragment()
             vista.findNavController().navigate(valor)
         }
         btnSeleccionar.setOnClickListener() {
-// Tenemos que guardar la referencia de la comida para cargarla en la lista de mis comidas
             agregarComidaRealizadaABase()
         }
     }
@@ -86,9 +73,9 @@ class DetailFragment : Fragment() {
         calorias.text =  comida.calorias.toString() + " calorías"
         descripcion.text = comida.descripcion
     }
+
     private fun agregarComidaRealizadaABase() {
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
-        showAlert(usuario)
 
         val comidaRealizada = comida
         val newFood = hashMapOf(
@@ -99,15 +86,13 @@ class DetailFragment : Fragment() {
             "calorias" to comidaRealizada.calorias,
             "descripcion" to comidaRealizada.descripcion,
             "urlImagen" to comidaRealizada.urlImagen
-
         )
         db.collection("comidasRealizadas")
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                showAlert("La comida se cargó en la BBDD de Realizadas")
+                showAlert("Carga Exitosa")
                 db.collection("users").document("misComidas")
-
             }
             .addOnFailureListener {
                     e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
@@ -124,5 +109,3 @@ class DetailFragment : Fragment() {
         dialog.show()
     }
 }
-
-
