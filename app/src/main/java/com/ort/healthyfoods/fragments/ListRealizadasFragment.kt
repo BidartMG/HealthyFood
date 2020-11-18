@@ -2,26 +2,39 @@ package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
+import com.ort.healthyfoods.entities.FoodDetail
 import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+
 
 class ListRealizadasFragment : Fragment() {
 
@@ -115,15 +128,95 @@ class ListRealizadasFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-
         btnVolver.setOnClickListener {
-            //val goToPresentacion: ListRealizadasFragmentDirections.
+            //  val goToDetailBreakfastFragment = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListBreackfastFragment()
+            //   vista.findNavController().navigate(goToDetailBreakfastFragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val usuario: String = requireContext().getSharedPreferences(
+            "myPreferences",
+            Context.MODE_PRIVATE
+        ).getString("USER", "default")!!
+
+        var acumulados: ArrayList<Int> = ArrayList()
+        var lText: ArrayList<String> = ArrayList()
+        var formatter = SimpleDateFormat("dd-MM")
+
+
+        db.collection("comidasRealizadas")
+            .whereEqualTo("usuario", usuario)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val myObject = document.toObject(FoodDetail::class.java)
+
+                    val index = lText.indexOf(if(myObject.fechaRealizada == null) "Sin Informar" else formatter.format(myObject.fechaRealizada))
+                    if(index == -1){
+                        lText.add(if(myObject.fechaRealizada == null) "Sin Informar" else formatter.format(myObject.fechaRealizada))
+                        acumulados.add(myObject.calorias)
+                    }else{
+                        acumulados[index] += myObject.calorias
+                    }
+
+
+                }
+
+                val chart = this.grafico
+                chart.setDrawGridBackground(false)
+                chart.setTouchEnabled(false)
+                chart.isDragEnabled = false
+                chart.setPinchZoom(false)
+                chart.isDoubleTapToZoomEnabled = false
+
+                val l = chart.legend
+                l.isEnabled = false
+
+                val axisLeft = chart.axisLeft
+                axisLeft.spaceTop = 35f
+                axisLeft.axisMinimum = 0f
+
+                val axisRight = chart.axisRight
+                axisRight.isEnabled = false
+
+                val axisX = chart.xAxis
+                axisX.granularity = 1f
+                axisX.position = XAxis.XAxisPosition.BOTTOM
+
+                axisX.setValueFormatter(object : ValueFormatter() {
+                    override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
+                        return lText.get(value.toInt())
+                    }
+                });
+
+                val lAcumulados: ArrayList<BarEntry> = ArrayList<BarEntry>()
+                for ((index, value) in acumulados.withIndex()) {
+                    lAcumulados.add(BarEntry(index.toFloat(), value.toFloat()))
+                }
+
+                val barAcumulado = BarDataSet(lAcumulados, "Acumulados")
+                barAcumulado.axisDependency = YAxis.AxisDependency.LEFT
+                barAcumulado.color = Color.BLUE
+                barAcumulado.setDrawValues(false)
+
+                val data = BarData(barAcumulado)
+                data.barWidth = 0.9f;
+
+                chart.data= data
+                chart.setFitBars(true)
+
+                chart.invalidate()
+            }
+
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting documents: ")
+            }
 
     }
 
-    fun onItemClick(position:Int) {
+    fun onItemClick(position: Int) {
         //val goToDetail = ListRealizadasFragmentDirections. ListFoodFragmentDirections.actionListFoodFragmentToDetailFragment(comidaList[position])
         //vista.findNavController().navigate(goToDetail)
         //Snackbar.make(frameLayoutRealizadas,"Esssssssssssssssssssstamos en OnItemClick",Snackbar.LENGTH_SHORT).show()
