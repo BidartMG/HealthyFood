@@ -8,33 +8,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.ort.healthyfoods.R
-import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.FoodDetail
 import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 
 class ListRealizadasFragment : Fragment() {
@@ -48,18 +40,14 @@ class ListRealizadasFragment : Fragment() {
 
     private lateinit var viewModel: ListRealizadasViewModel
     private lateinit var vista: View
-    private lateinit var recRealizadas: RecyclerView
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
-    private lateinit var btnVolver: Button
+
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
-
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     var acumuladorCalorias: Int = 0
 
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var realizadasListAdapter: FoodListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,12 +57,7 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
-        btnVolver = vista.findViewById(R.id.btn_volver_realizadas)
 
-        recRealizadas = vista.findViewById(R.id.recRealizadas)
-        recRealizadas.setHasFixedSize(true)
-        linearLayoutManager= LinearLayoutManager(context)
-        recRealizadas.layoutManager = linearLayoutManager
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
@@ -106,10 +89,7 @@ class ListRealizadasFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        btnVolver.setOnClickListener {
-            //  val goToDetailBreakfastFragment = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListBreackfastFragment()
-            //   vista.findNavController().navigate(goToDetailBreakfastFragment)
-        }
+
     }
 
     override fun onResume() {
@@ -188,19 +168,5 @@ class ListRealizadasFragment : Fragment() {
                 Log.d(ContentValues.TAG, "Error getting documents: " + exception.message.toString())
             }
 
-    }
-
-    fun onItemClick(position: Int) {
-        //val goToDetail = ListRealizadasFragmentDirections. ListFoodFragmentDirections.actionListFoodFragmentToDetailFragment(comidaList[position])
-        //vista.findNavController().navigate(goToDetail)
-        //Snackbar.make(frameLayoutRealizadas,"Esssssssssssssssssssstamos en OnItemClick",Snackbar.LENGTH_SHORT).show()
-    }
-
-    fun contarCalorias(): Int {
-        var acumulador = 0
-        for(comida in comidasRealizadasList) {
-            acumulador += comida.calorias.toInt()
-        }
-        return acumulador
     }
 }
