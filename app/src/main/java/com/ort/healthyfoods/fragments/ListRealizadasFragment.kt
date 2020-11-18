@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
@@ -80,8 +81,6 @@ class ListRealizadasFragment : Fragment() {
             .whereEqualTo("usuario", usuario)
             .get()
             .addOnSuccessListener { result ->
-                //realizadasListAdapter = FoodListAdapter(comidasRealizadasList,requireContext()){position -> onItemClick(position)}
-                //recRealizadas.adapter  = realizadasListAdapter
                 for (document in result) {
                     val myObject = document.toObject(Food::class.java)
                     comidasRealizadasList.add(myObject)
@@ -89,8 +88,6 @@ class ListRealizadasFragment : Fragment() {
                 }
                 caloriasConsumidas.setText(acumuladorCalorias.toString())
 
-                //caloriasConsumidas.setText(acumuladorCalorias.toString() + "*************")
-                // Cargar en los TextView los datos acumulados de calorias consumidas
                 caloriasSemanales.setText("Estas dentro del límite semanal")
 
 
@@ -105,25 +102,6 @@ class ListRealizadasFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListRealizadasViewModel::class.java)
-        // TODO: Use the ViewModel -  Ver de ponerlo sino en onCreate
-        /*db.collection("comidasRealizadas")
-            .get()
-            .addOnSuccessListener { result ->
-                realizadasListAdapter = FoodListAdapter(comidasRealizadasList,requireContext()){position -> onItemClick(position)}
-                recRealizadas.adapter  = realizadasListAdapter
-                for (document in result) {
-                    val myObject = document.toObject(Food::class.java)
-                    comidasRealizadasList.add(myObject)
-                    acumuladorCalorias += myObject.calorias
-
-                }
-
-            }
-            .addOnFailureListener {exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
-            }*/
-
-
     }
 
     override fun onStart() {
@@ -136,10 +114,7 @@ class ListRealizadasFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val usuario: String = requireContext().getSharedPreferences(
-            "myPreferences",
-            Context.MODE_PRIVATE
-        ).getString("USER", "default")!!
+        val usuario: String = requireContext().getSharedPreferences("myPreferences",Context.MODE_PRIVATE).getString("USER", "default")!!
 
         var acumulados: ArrayList<Int> = ArrayList()
         var lText: ArrayList<String> = ArrayList()
@@ -148,6 +123,7 @@ class ListRealizadasFragment : Fragment() {
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
+            .orderBy("fechaRealizada", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -160,8 +136,6 @@ class ListRealizadasFragment : Fragment() {
                     }else{
                         acumulados[index] += myObject.calorias
                     }
-
-
                 }
 
                 val chart = this.grafico
@@ -211,7 +185,7 @@ class ListRealizadasFragment : Fragment() {
             }
 
             .addOnFailureListener { exception ->
-                Log.d(ContentValues.TAG, "Error getting documents: ")
+                Log.d(ContentValues.TAG, "Error getting documents: " + exception.message.toString())
             }
 
     }

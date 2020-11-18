@@ -77,7 +77,7 @@ class FoodDetail (idComida:Int, nombre:String, descripcion:String, tipoComida:St
 
 }
 
-//Validacion del dia
+//Validacion del Date
 fun Parcel.readDate(): Date? {
     val long = readLong()
     return if (long != -1L) Date(long) else null
