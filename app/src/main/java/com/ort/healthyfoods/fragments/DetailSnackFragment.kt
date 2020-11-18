@@ -58,7 +58,9 @@ class DetailSnackFragment : Fragment() {
             vista.findNavController().navigate(goToListSnacks)
         }
         btnSeleccionar.setOnClickListener {
-           //TODO  agregarComidaRealizadaABase()
+            agregarComidaRealizadaABase()
+            val goToMenu = DetailSnackFragmentDirections.actionDetailSnackFragmentToPresentacionFragment()
+            vista.findNavController().navigate(goToMenu)
         }
     }
 
