@@ -44,12 +44,15 @@ class AddBreakfastFragment : Fragment() {
 
         return vista
     }
+
     override fun onStart() {
         super.onStart()
+
         btnAgregar.setOnClickListener {
             agregarDesayuno()
             clear()
         }
+
         btnCancelar.setOnClickListener {
             clear()
             val goToBack = AddBreakfastFragmentDirections.actionAddBreakfastFragmentToListBreackfastFragment()
@@ -68,6 +71,7 @@ class AddBreakfastFragment : Fragment() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
             val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
             val desayunoPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
+
             val newFood = hashMapOf(
                 "usuario" to  usuario,
                 "idComida" to desayunoPrueba.idComida,
@@ -95,8 +99,7 @@ class AddBreakfastFragment : Fragment() {
     }
 
     /**
-     * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
-     * la variante con dos strings como parámetro para asignar también el título de la ventana
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())

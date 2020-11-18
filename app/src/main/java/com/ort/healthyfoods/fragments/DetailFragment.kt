@@ -16,9 +16,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
-import com.ort.healthyfoods.entities.User
-import com.ort.healthyfoods.fragments.DetailFragmentArgs
-import com.ort.healthyfoods.fragments.DetailFragmentDirections
 import java.sql.Timestamp
 
 import java.time.Instant
@@ -80,6 +77,7 @@ class DetailFragment : Fragment() {
         calorias.text =  comida.calorias.toString() + " calorías"
         descripcion.text = comida.descripcion
     }
+
     private fun agregarComidaRealizadaABase() {
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 

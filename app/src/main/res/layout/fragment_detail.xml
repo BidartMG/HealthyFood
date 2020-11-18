@@ -39,6 +39,7 @@
         android:id="@+id/img_detail_food"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/autofillHintsUrl"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -59,20 +60,17 @@
             android:id="@+id/txt_name_item_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:editable="false"
-            android:textStyle="bold" />
+            android:editable="false" />
 
         <TextView
             android:id="@+id/txt_detail_tipo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/txt_detail_calorias"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"
@@ -81,8 +79,7 @@
         <TextView
             android:id="@+id/txt_detail_descrip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"
@@ -92,13 +89,22 @@
             android:id="@+id/btn_volver_lista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver a Lista" />
+            android:background="@color/colorPrimary"
+            android:elevation="10dp"
+            android:text="@string/button_volver" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
 
         <Button
             android:id="@+id/btn_seleccionar_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seleccionar" />
+            android:background="@color/colorPrimary"
+            android:elevation="10dp"
+            android:text="@string/button_add" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

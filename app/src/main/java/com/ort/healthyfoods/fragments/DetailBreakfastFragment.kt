@@ -1,7 +1,6 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,8 +15,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
-import com.ort.healthyfoods.entities.User
-import com.ort.healthyfoods.fragments.DetailFragmentArgs
 import java.sql.Timestamp
 import java.time.Instant
 
@@ -65,9 +62,6 @@ class DetailBreakfastFragment : Fragment() {
         }
         btnSeleccionar.setOnClickListener {
             agregarComidaRealizadaABase()
-            val goToRealizadasList = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListRealizadasFragment()
-            vista.findNavController().navigate(goToRealizadasList)
-
         }
     }
 
@@ -82,8 +76,10 @@ class DetailBreakfastFragment : Fragment() {
         calorias.text =  comida.calorias.toString() + " calorías"
         descripcion.text = comida.descripcion
     }
+
     private fun agregarComidaRealizadaABase() {
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+
         val comidaRealizada = comida
         val newFood = hashMapOf(
             "usuario" to  usuario,
@@ -106,6 +102,7 @@ class DetailBreakfastFragment : Fragment() {
                 showAlert("Entró al ERROR")
             }
     }
+
     fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Hola")

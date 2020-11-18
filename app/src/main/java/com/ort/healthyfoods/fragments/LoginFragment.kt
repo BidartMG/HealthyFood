@@ -24,8 +24,10 @@ class LoginFragment : Fragment() {
     lateinit var password: EditText
     lateinit var btnAceptar: Button
     lateinit var btnRegister: Button
+
     val PREF_NAME = "myPreferences"
-    
+
+
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,6 @@ class LoginFragment : Fragment() {
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
 
-
         btnRegister.setOnClickListener() {
             clear()
             val goToRegister = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()
@@ -68,7 +69,6 @@ class LoginFragment : Fragment() {
                     editor.putString("USER", "ERROR") // REVISAR el Else
                 }
                 editor.putString("USER", usuario.text.toString())
-
                 editor.apply()
 
                 FirebaseAuth.getInstance()

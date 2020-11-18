@@ -1,26 +1,22 @@
 package com.ort.healthyfoods.fragments
 
 import android.os.Bundle
-import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 import com.ort.healthyfoods.R
 
 class PresentacionFragment : Fragment() {
-    private lateinit var vista: View
-    private lateinit var txtListados: TextView
-    private lateinit var txtMisDatos: TextView
-    private lateinit var txtMisComidas: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    lateinit var vista: View
+    lateinit var viewPager: ViewPager2
+    lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,27 +24,47 @@ class PresentacionFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_presentacion, container, false)
-        txtListados = vista.findViewById(R.id.txt_listados)
-        txtMisDatos = vista.findViewById(R.id.txt_mis_datos)
-        txtMisComidas = vista.findViewById(R.id.txt_title_comrealiz)
+        tabLayout = vista.findViewById(R.id.tab_layout)
+        viewPager = vista.findViewById(R.id.view_pager)
         return vista
     }
 
     override fun onStart() {
         super.onStart()
-        txtMisComidas.setOnClickListener {
-            val goToMisComidas = PresentacionFragmentDirections.actionPresentacionFragmentToListRealizadasFragment()
-            vista.findNavController().navigate(goToMisComidas)
+        viewPager.setAdapter(createCardAdapter())
+        //viewPager.isUserInputEnabled=false
+
+        TabLayoutMediator(tabLayout,viewPager,TabLayoutMediator.TabConfigurationStrategy { tab,position ->
+            when (position) {
+                0 -> tab.text = "Menúes"
+                1 -> tab.text = "Mis Comidas"
+                2 -> tab.text = "Mis Datos"
+                else -> tab.text = "undefined"
+            }
+        }).attach()
+    }
+
+    private fun createCardAdapter():ViewPagerAdapter? {
+        return ViewPagerAdapter(requireActivity())
+    }
+
+    class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+        override fun createFragment(position:Int):Fragment {
+            return when(position) {
+                0 -> PrincipalFragment()
+                1 -> ListRealizadasFragment()
+                2 -> MisDatosFragment()
+
+                else -> PrincipalFragment()
+            }
         }
 
-        txtListados.setOnClickListener {
-            val goToListados = PresentacionFragmentDirections.actionPresentacionFragmentToPrincipalFragment()
-            vista.findNavController().navigate(goToListados)
+        override fun getItemCount(): Int {
+            return TAB_COUNT
         }
 
-        txtMisDatos.setOnClickListener {
-            // TODO
+        companion object {
+            private const val TAB_COUNT = 3
         }
-
     }
 }

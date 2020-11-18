@@ -17,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 
-
 class DetailSnackFragment : Fragment() {
     private lateinit var vista: View
     private lateinit var btnVolver: Button
@@ -27,13 +26,12 @@ class DetailSnackFragment : Fragment() {
     private lateinit var calorias: TextView
     private lateinit var tipoComida: TextView
     private lateinit var descripcion: TextView
+
     private lateinit var comida: Food
     private val db = FirebaseFirestore.getInstance()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -73,7 +71,7 @@ class DetailSnackFragment : Fragment() {
             .into(image)
         titulo.text = comida.nombre
         tipoComida.text = "Tipo: " +comida.tipoComida
-        calorias.text =  comida.calorias.toString() + " calorías"
+        calorias.text =  comida.calorias.toString() + " calorÃ­as"
         descripcion.text = comida.descripcion
     }
 
@@ -88,8 +86,7 @@ class DetailSnackFragment : Fragment() {
             "tipoComida" to comidaRealizada.tipoComida,
             "calorias" to comidaRealizada.calorias,
             "descripcion" to comidaRealizada.descripcion,
-            "urlImagen" to comidaRealizada.urlImagen,
-            "fechaRealizada" to Timestamp.from(Instant.now())
+            "urlImagen" to comidaRealizada.urlImagen
         )
         db.collection("comidasRealizadas")
             .add(newFood)
@@ -99,7 +96,7 @@ class DetailSnackFragment : Fragment() {
             }
             .addOnFailureListener {
                     e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
-                showAlert("Entró al ERROR")
+                showAlert("EntrÃ³ al ERROR")
             }
     }
 

@@ -14,6 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="280dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/imagen_layout"
         android:src="@drawable/cocinero"
         app:layout_constraintBottom_toTopOf="@+id/lin_lay_vert_add_food"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="@string/autofillHintsName"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/name_food"
             android:inputType="textPersonName" />
 
         <EditText
@@ -46,18 +48,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="@string/autofillHintsUrl"
             android:ems="10"
-            android:hint="UrlImage"
-            android:inputType="textPersonName" />
+            android:hint="@string/url"
+            android:inputType="textUri|textPersonName" />
 
         <EditText
             android:id="@+id/edt_detail_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="detalle de como se compone el alimento"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Detalle de comida"
+            android:hint="@string/detail_food"
             android:inputType="textMultiLine" />
 
         <EditText
@@ -65,8 +69,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:autofillHints="son las calorías que contiene el plato"
             android:ems="10"
-            android:hint="Calorías"
+            android:hint="@string/calorias_food"
             android:inputType="number" />
 
         <LinearLayout
@@ -117,7 +122,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:background="@color/colorAccent"
+            android:text="@string/button_cancel" />
 
         <Space
             android:layout_width="6dp"
@@ -129,7 +135,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Aceptar" />
+            android:background="@color/colorPrimary"
+            android:text="@string/add_food" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,8 +64,6 @@ class AddSnacksFragment : Fragment() {
      * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
      * base de datos correspondiente, caso contrario emite un alerta avisando..
      */
-    //TODO verificar que el identificador sea único y se autoincremente, validar que no haya platos
-    // repetidos.
     private fun agregarColación() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
             val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!

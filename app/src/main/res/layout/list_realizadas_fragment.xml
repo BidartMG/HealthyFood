@@ -15,12 +15,11 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <LinearLayout
-        android:layout_width="304dp"
-        android:layout_height="350dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="68dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="32dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/recRealizadas"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +31,11 @@
             android:id="@+id/edt_calorias_consumidas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="@string/edt_cal_cons"
             android:ems="10"
-            android:hint="Calorias Consumidas Semana"
+            android:hint="@string/edt_cal_cons"
             android:inputType="textPersonName"
-            android:text="Calorias Consumidas:" />
+            android:text="@string/edt_cal_cons" />
 
         <Space
             android:layout_width="match_parent"
@@ -47,14 +47,25 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Objetivo Semanal: " />
+            android:text="@string/objetivo_cal" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <Button
+            android:id="@+id/btn_detalle_realizadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/btn_realizadas" />
 
         <Button
             android:id="@+id/btn_volver_realizadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:text="Volver a Principal" />
-
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/grafico"
@@ -62,17 +73,15 @@
             android:layout_height="183dp"
             android:fillViewport="true">
         </com.github.mikephil.charting.charts.BarChart>
-
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recRealizadas"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

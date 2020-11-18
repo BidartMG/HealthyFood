@@ -30,11 +30,6 @@ class AddFoodFragment : Fragment() {
     lateinit var btnAgregar: Button
     lateinit var btnCancelar: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,10 +48,12 @@ class AddFoodFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         btnAgregar.setOnClickListener() {
             agregarComida()
             clear()
         }
+
         btnCancelar.setOnClickListener() {
             clear()
             val goToBack = AddFoodFragmentDirections.actionAddFoodFragmentToListFoodFragment()
@@ -65,7 +62,7 @@ class AddFoodFragment : Fragment() {
 
     }
 
-	/**
+    /**
      * Método privado que comprueba que los inputs no se encuentren vacíos, si no lo están: crea un
      * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
      * base de datos correspondiente, caso contrario emite un alerta avisando..
