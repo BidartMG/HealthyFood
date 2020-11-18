@@ -47,7 +47,7 @@ class ListFoodFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         viewModel.initTestList()
+         //viewModel.initTestList()
 
          //viewModel.cargarAlm_Cen_Base()
 

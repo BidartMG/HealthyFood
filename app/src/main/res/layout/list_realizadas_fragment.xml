@@ -60,13 +60,6 @@
             android:background="@color/colorPrimary"
             android:text="@string/btn_realizadas" />
 
-        <Button
-            android:id="@+id/btn_volver_realizadas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="Volver a Principal" />
-
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/grafico"
             android:layout_width="match_parent"

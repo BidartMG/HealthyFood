@@ -51,7 +51,7 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var recRealizadas: RecyclerView
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
-    private lateinit var btnVolver: Button
+
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
 
@@ -69,7 +69,6 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
-        btnVolver = vista.findViewById(R.id.btn_volver_realizadas)
 
         recRealizadas = vista.findViewById(R.id.recRealizadas)
         recRealizadas.setHasFixedSize(true)
@@ -106,10 +105,7 @@ class ListRealizadasFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        btnVolver.setOnClickListener {
-            //  val goToDetailBreakfastFragment = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListBreackfastFragment()
-            //   vista.findNavController().navigate(goToDetailBreakfastFragment)
-        }
+
     }
 
     override fun onResume() {
