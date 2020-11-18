@@ -41,7 +41,7 @@ class DetailSnackFragment : Fragment() {
         vista = inflater.inflate(R.layout.fragment_detail_snack, container, false)
         btnSeleccionar = vista.findViewById(R.id.btn_seleccionar_snack)
         btnVolver = vista.findViewById(R.id.btn_volver_alMenu)
-        image = vista.findViewById(R.id.imageViewUnderConst)
+        image = vista.findViewById(R.id.img_detail_food)
         titulo = vista.findViewById(R.id.txt_name_snack)
         calorias = vista.findViewById(R.id.txt_calorias_snack)
         tipoComida = vista.findViewById(R.id.txt_tipo_snack)

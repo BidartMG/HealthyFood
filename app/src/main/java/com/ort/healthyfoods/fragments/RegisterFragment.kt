@@ -57,7 +57,7 @@ class RegisterFragment : Fragment() {
         titulo.text = "Ingrese sus datos"
         btnCancel.setOnClickListener() {
             limpiarEditTexts()
-            // Buscar la forma de cerrar o cancelar la vista
+            // Buscar  cerrar o cancelar la vista
         }
 
         btnAccept.setOnClickListener() {
