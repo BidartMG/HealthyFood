@@ -101,7 +101,11 @@
         android:id="@+id/listRealizadasFragment"
         android:name="com.ort.healthyfoods.fragments.ListRealizadasFragment"
         android:label="list_realizadas_fragment"
-        tools:layout="@layout/list_realizadas_fragment" />
+        tools:layout="@layout/list_realizadas_fragment" >
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addSnacksFragment"
         android:name="com.ort.healthyfoods.fragments.AddSnacksFragment"

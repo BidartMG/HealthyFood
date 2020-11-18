@@ -118,10 +118,10 @@ class ListRealizadasFragment : Fragment() {
         super.onStart()
 
 
-        btnVolver.setOnClickListener {
+        /*btnVolver.setOnClickListener {
             vista.findNavController().navigate(R.id.action_listRealizadasFragment_to_principalFragment)
 
-        }
+        }*/
 
     }
 
