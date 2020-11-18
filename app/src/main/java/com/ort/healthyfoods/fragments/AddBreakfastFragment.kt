@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,11 +14,14 @@ import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class AddBreakfastFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var vista: View
+
     lateinit var nombre: EditText
     lateinit var calorias: EditText
     lateinit var descripcion: EditText
@@ -37,6 +41,7 @@ class AddBreakfastFragment : Fragment() {
         urlImagen = vista.findViewById(R.id.edt_url_img_desayuno)
         btnAgregar = vista.findViewById(R.id.btn_accept_add_breack)
         btnCancelar = vista.findViewById(R.id.btn_cancel_add_breack)
+
         return vista
     }
 
@@ -64,14 +69,18 @@ class AddBreakfastFragment : Fragment() {
     // repetidos.
     private fun agregarDesayuno() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
+            val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
             val desayunoPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
+
             val newFood = hashMapOf(
+                "usuario" to  usuario,
                 "idComida" to desayunoPrueba.idComida,
                 "nombre" to desayunoPrueba.nombre,
                 "tipoComida" to desayunoPrueba.tipoComida,
                 "calorias" to desayunoPrueba.calorias,
                 "descripcion" to desayunoPrueba.descripcion,
-                "urlImagen" to desayunoPrueba.urlImagen
+                "urlImagen" to desayunoPrueba.urlImagen,
+                "fechaRealizada" to Timestamp.from(Instant.now())
             )
             db.collection("desayunosYmeriendas")
                 .add(newFood)

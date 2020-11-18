@@ -47,8 +47,8 @@ class ListFoodFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // viewModel.initTestList()
-        // YA SE CARGARON A BBDD
+         viewModel.initTestList()
+
          //viewModel.cargarAlm_Cen_Base()
 
         // ALMUERZOS
@@ -59,8 +59,10 @@ class ListFoodFragment : Fragment() {
                     val myObject = document.toObject(Food::class.java)
                     comidaList.add(myObject)
                 }
+
                 foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}/** ESTO */
                 recComidas.adapter  = foodListAdapter
+
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
@@ -91,6 +93,7 @@ class ListFoodFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         //var indice = ListFoodFragmentArgs.fromBundle(requireArguments()).index
+
 
         btnAdd.setOnClickListener() {
             val goToAddFood = ListFoodFragmentDirections.actionListFoodFragmentToAddFoodFragment()

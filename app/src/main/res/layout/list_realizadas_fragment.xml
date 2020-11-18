@@ -26,6 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <EditText
             android:id="@+id/edt_calorias_consumidas"
             android:layout_width="match_parent"
@@ -70,6 +71,12 @@
             android:background="@color/colorPrimary"
             android:text="Volver a Principal" />
 
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/grafico"
+            android:layout_width="match_parent"
+            android:layout_height="183dp"
+            android:fillViewport="true">
+        </com.github.mikephil.charting.charts.BarChart>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

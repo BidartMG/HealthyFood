@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,10 +15,13 @@ import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 class AddFoodFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var vista: View
+
     lateinit var nombre: EditText
     lateinit var calorias: EditText
     lateinit var descripcion: EditText
@@ -55,6 +59,7 @@ class AddFoodFragment : Fragment() {
             val goToBack = AddFoodFragmentDirections.actionAddFoodFragmentToListFoodFragment()
             vista.findNavController().navigate(goToBack)
         }
+
     }
 
     /**
@@ -63,14 +68,18 @@ class AddFoodFragment : Fragment() {
      * base de datos correspondiente, caso contrario emite un alerta avisando..
      */
     private fun agregarComida() {
+        val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+
         val comidaPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),calorias.text.toString().toInt())
         val newFood = hashMapOf(
+            "usuario" to  usuario,
             "idComida" to comidaPrueba.idComida,
             "nombre" to comidaPrueba.nombre,
             "tipoComida" to comidaPrueba.tipoComida,
             "calorias" to comidaPrueba.calorias,
             "descripcion" to comidaPrueba.descripcion,
-            "urlImagen" to comidaPrueba.urlImagen
+            "urlImagen" to comidaPrueba.urlImagen,
+            "fechaRealizada" to Timestamp.from(Instant.now())
         )
         db.collection("almuerzosYcenas")
             .add(newFood)

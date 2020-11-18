@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class AddSnacksFragment : Fragment() {
@@ -38,6 +41,7 @@ class AddSnacksFragment : Fragment() {
         urlImagen = vista.findViewById(R.id.edt_urlImagen_snack)
         btnCancelar = vista.findViewById(R.id.btn_cancel_snack)
         btnAgregar = vista.findViewById(R.id.btn_add_snack)
+
         return vista
     }
 
@@ -62,14 +66,17 @@ class AddSnacksFragment : Fragment() {
      */
     private fun agregarColación() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
+            val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
             val colacion = Food(525600,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
             val newFood = hashMapOf(
+                "usuario" to usuario,
                 "idComida" to colacion.idComida,
                 "nombre" to colacion.nombre,
                 "tipoComida" to colacion.tipoComida,
                 "calorias" to colacion.calorias,
                 "descripcion" to colacion.descripcion,
-                "urlImagen" to colacion.urlImagen
+                "urlImagen" to colacion.urlImagen,
+                "fechaRealizada" to Timestamp.from(Instant.now())
             )
             db.collection("colaciones")
                 .add(newFood)

@@ -16,6 +16,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
+
 
 class DetailBreakfastFragment : Fragment() {
     private lateinit var vista: View
@@ -29,6 +32,7 @@ class DetailBreakfastFragment : Fragment() {
 
     private lateinit var comida: Food
     private val db = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +91,8 @@ class DetailBreakfastFragment : Fragment() {
             "tipoComida" to comidaRealizada.tipoComida,
             "calorias" to comidaRealizada.calorias,
             "descripcion" to comidaRealizada.descripcion,
-            "urlImagen" to comidaRealizada.urlImagen
+            "urlImagen" to comidaRealizada.urlImagen,
+            "fechaRealizada" to Timestamp.from(Instant.now())
         )
         db.collection("comidasRealizadas")
             .add(newFood)
@@ -109,4 +114,5 @@ class DetailBreakfastFragment : Fragment() {
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
         dialog.show()
     }
+
 }

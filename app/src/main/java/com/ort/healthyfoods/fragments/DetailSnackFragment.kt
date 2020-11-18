@@ -46,6 +46,7 @@ class DetailSnackFragment : Fragment() {
         calorias = vista.findViewById(R.id.txt_calorias_snack)
         tipoComida = vista.findViewById(R.id.txt_tipo_snack)
         descripcion = vista.findViewById(R.id.txt_detalle_snack)
+
         return vista
     }
 
