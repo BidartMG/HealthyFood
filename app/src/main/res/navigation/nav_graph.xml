@@ -21,7 +21,17 @@
         android:id="@+id/principalFragment"
         android:name="com.ort.healthyfoods.fragments.PrincipalFragment"
         android:label="fragment_principal"
-        tools:layout="@layout/fragment_principal" />
+        tools:layout="@layout/fragment_principal" >
+        <action
+            android:id="@+id/action_principalFragment_to_listFoodFragment"
+            app:destination="@id/listFoodFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
+        <action
+            android:id="@+id/action_principalFragment_to_listBreackfastFragment"
+            app:destination="@id/listBreackfastFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.ort.healthyfoods.fragments.RegisterFragment"
