@@ -26,6 +26,8 @@ class LoginFragment : Fragment() {
     lateinit var btnRegister: Button
 
     val PREF_NAME = "myPreferences"
+
+
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {

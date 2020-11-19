@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,9 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class AddSnacksFragment : Fragment() {
@@ -50,6 +54,8 @@ class AddSnacksFragment : Fragment() {
         }
         btnCancelar.setOnClickListener {
             clear()
+            val goToBack = AddSnacksFragmentDirections.actionAddSnacksFragmentToListColacionesFragment()
+            vista.findNavController().navigate(goToBack)
         }
     }
 
@@ -58,18 +64,19 @@ class AddSnacksFragment : Fragment() {
      * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
      * base de datos correspondiente, caso contrario emite un alerta avisando..
      */
-    //TODO verificar que el identificador sea único y se autoincremente, validar que no haya platos
-    // repetidos.
     private fun agregarColación() {
-        if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {//////
+        if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
+            val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
             val colacion = Food(525600,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
             val newFood = hashMapOf(
+                "usuario" to usuario,
                 "idComida" to colacion.idComida,
                 "nombre" to colacion.nombre,
                 "tipoComida" to colacion.tipoComida,
                 "calorias" to colacion.calorias,
                 "descripcion" to colacion.descripcion,
-                "urlImagen" to colacion.urlImagen
+                "urlImagen" to colacion.urlImagen,
+                "fechaRealizada" to Timestamp.from(Instant.now())
             )
             db.collection("colaciones")
                 .add(newFood)
@@ -88,8 +95,7 @@ class AddSnacksFragment : Fragment() {
     }
 
     /**
-     * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
-     * la variante con dos strings como parámetro para asignar también el título de la ventana
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())

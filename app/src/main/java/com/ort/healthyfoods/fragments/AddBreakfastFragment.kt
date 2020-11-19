@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 
 class AddBreakfastFragment : Fragment() {
@@ -41,12 +44,15 @@ class AddBreakfastFragment : Fragment() {
 
         return vista
     }
+
     override fun onStart() {
         super.onStart()
+
         btnAgregar.setOnClickListener {
             agregarDesayuno()
             clear()
         }
+
         btnCancelar.setOnClickListener {
             clear()
             val goToBack = AddBreakfastFragmentDirections.actionAddBreakfastFragmentToListBreackfastFragment()
@@ -63,14 +69,18 @@ class AddBreakfastFragment : Fragment() {
     // repetidos.
     private fun agregarDesayuno() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
-            val desayunoPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
+            val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+            val desayunoPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),"",urlImagen.text.toString(),calorias.text.toString().toInt())
+
             val newFood = hashMapOf(
+                "usuario" to  usuario,
                 "idComida" to desayunoPrueba.idComida,
                 "nombre" to desayunoPrueba.nombre,
                 "tipoComida" to desayunoPrueba.tipoComida,
                 "calorias" to desayunoPrueba.calorias,
                 "descripcion" to desayunoPrueba.descripcion,
-                "urlImagen" to desayunoPrueba.urlImagen
+                "urlImagen" to desayunoPrueba.urlImagen,
+                "fechaRealizada" to Timestamp.from(Instant.now())
             )
             db.collection("desayunosYmeriendas")
                 .add(newFood)
@@ -89,8 +99,7 @@ class AddBreakfastFragment : Fragment() {
     }
 
     /**
-     * Método privado que recibe un mensaje a mostrar en formato de ventana alert, se puede crear
-     * la variante con dos strings como parámetro para asignar también el título de la ventana
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())

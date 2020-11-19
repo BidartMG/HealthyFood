@@ -1,6 +1,7 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,11 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
 
 class AddFoodFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -27,11 +29,6 @@ class AddFoodFragment : Fragment() {
     lateinit var urlImagen: EditText
     lateinit var btnAgregar: Button
     lateinit var btnCancelar: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +48,7 @@ class AddFoodFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         btnAgregar.setOnClickListener() {
             if(nombre.text.toString().isEmpty()) {
                 nombre.error = "Campo 'Nombre' no puede ser vacío"
@@ -61,35 +59,41 @@ class AddFoodFragment : Fragment() {
             } else if (descripcion.text.toString().isEmpty()) {
                 descripcion.error = "Campo 'Descripción' no puede ser vacío"
                 descripcion.requestFocus()
-            } else if (tipoComida.text.toString().isEmpty()) {
-                tipoComida.error = "Campo 'Tipo comida' no puede ser vacío"
-                tipoComida.requestFocus()
-            } else if (urlImagen.text.toString().isEmpty()) {
-                urlImagen.error = "Campo 'Url Imagen' no puede ser vacío"
-                urlImagen.requestFocus()
             } else {
                 agregarComida()
-                //clear()
-                vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
-            }
+                clear()
+                val goToBack = AddFoodFragmentDirections.actionAddFoodFragmentToListFoodFragment()
+                vista.findNavController().navigate(goToBack)
 
+            }
         }
+
         btnCancelar.setOnClickListener() {
             clear()
-            vista.findNavController().navigate(R.id.action_addFoodFragment_to_listFoodFragment)
+            val goToBack = AddFoodFragmentDirections.actionAddFoodFragmentToListFoodFragment()
+            vista.findNavController().navigate(goToBack)
         }
 
     }
 
+    /**
+     * Método privado que comprueba que los inputs no se encuentren vacíos, si no lo están: crea un
+     * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
+     * base de datos correspondiente, caso contrario emite un alerta avisando..
+     */
     private fun agregarComida() {
-        val comidaPrueba = Food(525600,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),calorias.text.toString().toInt())
+        val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+
+        val comidaPrueba = Food(-1,nombre.text.toString(),descripcion.text.toString(),tipoComida.text.toString(),urlImagen.text.toString(),calorias.text.toString().toInt())
         val newFood = hashMapOf(
+            "usuario" to  usuario,
             "idComida" to comidaPrueba.idComida,
             "nombre" to comidaPrueba.nombre,
             "tipoComida" to comidaPrueba.tipoComida,
             "calorias" to comidaPrueba.calorias,
             "descripcion" to comidaPrueba.descripcion,
-            "urlImagen" to comidaPrueba.urlImagen
+            "urlImagen" to comidaPrueba.urlImagen,
+            "fechaRealizada" to Timestamp.from(Instant.now())
         )
         db.collection("almuerzosYcenas")
             .add(newFood)
@@ -103,7 +107,9 @@ class AddFoodFragment : Fragment() {
             }
     }
 
-
+    /**
+     * Método privado que recibe un mensaje a mostrar en formato de ventana alert
+     */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Hola")
@@ -112,6 +118,10 @@ class AddFoodFragment : Fragment() {
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
         dialog.show()
     }
+
+    /**
+     * Método que se encarga de setear todos los campos como vacíos
+     */
     private fun clear() {
         nombre.setText("")
         calorias.setText("")

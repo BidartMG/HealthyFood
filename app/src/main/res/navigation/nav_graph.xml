@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_detailFragment_to_listFoodFragment"
             app:destination="@id/listFoodFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/listBreackfastFragment"
@@ -96,6 +99,9 @@
         <action
             android:id="@+id/action_detailBreakfastFragment_to_listBreackfastFragment"
             app:destination="@id/listBreackfastFragment" />
+        <action
+            android:id="@+id/action_detailBreakfastFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/listRealizadasFragment"
@@ -135,6 +141,12 @@
         <argument
             android:name="snack"
             app:argType="com.ort.healthyfoods.entities.Food" />
+        <action
+            android:id="@+id/action_detailSnackFragment_to_listColacionesFragment"
+            app:destination="@id/listColacionesFragment" />
+        <action
+            android:id="@+id/action_detailSnackFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
     <fragment
         android:id="@+id/presentacionFragment"
