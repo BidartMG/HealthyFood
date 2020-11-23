@@ -178,6 +178,9 @@
         <action
             android:id="@+id/action_presentacionFragment_to_listColacionesFragment"
             app:destination="@id/listColacionesFragment" />
+        <action
+            android:id="@+id/action_presentacionFragment_to_comidasRealizadasFragment"
+            app:destination="@id/comidasRealizadasFragment" />
     </fragment>
     <fragment
         android:id="@+id/misDatosFragment"
