@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_registerFragment_to_presentacionFragment"
             app:destination="@id/presentacionFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
