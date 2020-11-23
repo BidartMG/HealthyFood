@@ -10,16 +10,17 @@
     <LinearLayout
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="400dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
         android:elevation="12dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461">
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,6 +83,20 @@
             android:ems="10"
             android:inputType="textPassword" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:labelFor="@id/switch1"
+            android:text="¿Recibir tips saludables?" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:text="Activado" />
+
     </LinearLayout>
 
     <Button
@@ -107,4 +122,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contenedor"
         app:layout_constraintVertical_bias="0.148" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
