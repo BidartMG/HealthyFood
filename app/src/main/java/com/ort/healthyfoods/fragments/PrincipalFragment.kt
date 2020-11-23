@@ -40,14 +40,17 @@ class PrincipalFragment : Fragment() {
 
         img_desMer.setOnClickListener {
             val goToListBreackfast = PresentacionFragmentDirections.actionPresentacionFragmentToListBreackfastFragment()
+            //val goToListBreackfast = PrincipalFragmentDirections.actionPrincipalFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToListBreackfast)
         }
         img_almCen.setOnClickListener {
             val goToListFood = PresentacionFragmentDirections.actionPresentacionFragmentToListFoodFragment()
+            //val goToListFood = PrincipalFragmentDirections.actionPrincipalFragmentToListFoodFragment()
             vista.findNavController().navigate(goToListFood)
         }
         img_colac.setOnClickListener {
             val goToListSnacks = PresentacionFragmentDirections.actionPresentacionFragmentToListColacionesFragment()
+            //val goToListSnacks = PrincipalFragmentDirections.actionPrincipalFragmentToListColacionesFragment()
             vista.findNavController().navigate(goToListSnacks)
         }
     }
