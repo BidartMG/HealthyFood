@@ -185,14 +185,3 @@ class ListRealizadasFragment : Fragment() {
 
     }
 }
-
-/*
-fun trim(date: Date): Date? {
-    val calendar = Calendar.getInstance()
-    calendar.time = date
-    calendar[Calendar.MILLISECOND] = 0
-    calendar[Calendar.SECOND] = 0
-    calendar[Calendar.MINUTE] = 0
-    calendar[Calendar.HOUR] = 0
-    return calendar.time
-}*/
