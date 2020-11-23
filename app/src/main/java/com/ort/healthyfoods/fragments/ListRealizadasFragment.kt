@@ -30,7 +30,16 @@ import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.FoodDetail
 import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
+import java.lang.reflect.Array.set
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ListRealizadasFragment : Fragment() {
@@ -62,10 +71,15 @@ class ListRealizadasFragment : Fragment() {
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
         btnDetalle = vista.findViewById(R.id.btn_detalle_realizadas)
 
+        val now = Instant.now()
+        val truncated = now.truncatedTo((ChronoUnit.DAYS))
+
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
+            .whereGreaterThan("fechaRealizada", Timestamp.from(truncated)) //agregue
+            .orderBy("fechaRealizada")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -74,8 +88,7 @@ class ListRealizadasFragment : Fragment() {
                     acumuladorCalorias += myObject.calorias
                 }
                 caloriasConsumidas.text = acumuladorCalorias.toString()
-
-                caloriasSemanales.text = "Estas dentro del límite semanal"
+                caloriasSemanales.setText("Total de calorias consumidas en el día")
 
 
             }
@@ -134,6 +147,7 @@ class ListRealizadasFragment : Fragment() {
                 chart.setPinchZoom(false)
                 chart.isDoubleTapToZoomEnabled = false
 
+
                 val l = chart.legend
                 l.isEnabled = false
 
@@ -160,7 +174,7 @@ class ListRealizadasFragment : Fragment() {
 
                 val barAcumulado = BarDataSet(lAcumulados, "Acumulados")
                 barAcumulado.axisDependency = YAxis.AxisDependency.LEFT
-                barAcumulado.color = Color.BLUE
+                barAcumulado.color = Color.GREEN
                 barAcumulado.setDrawValues(false)
 
                 val data = BarData(barAcumulado)
