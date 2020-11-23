@@ -11,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -153,12 +156,11 @@ class ListRealizadasFragment : Fragment() {
                 val axisX = chart.xAxis
                 axisX.granularity = 1f
                 axisX.position = XAxis.XAxisPosition.BOTTOM
-
                 axisX.setValueFormatter(object : ValueFormatter() {
                     override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
                         return lText.get(value.toInt())
                     }
-                });
+                })
 
                 val lAcumulados: ArrayList<BarEntry> = ArrayList<BarEntry>()
                 for ((index, value) in acumulados.withIndex()) {
@@ -171,7 +173,7 @@ class ListRealizadasFragment : Fragment() {
                 barAcumulado.setDrawValues(false)
 
                 val data = BarData(barAcumulado)
-                data.barWidth = 0.9f;
+                data.barWidth = 0.9f
 
                 chart.data= data
                 chart.setFitBars(true)

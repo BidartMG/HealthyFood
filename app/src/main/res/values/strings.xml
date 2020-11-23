@@ -39,5 +39,9 @@
 
     <string name="bar_chart">Bar Chart</string>
     <string name="grafico_progreso">Grafico progreso</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="email">Email</string>
+    <string name="telefono">Telefono</string>
 
 </resources>

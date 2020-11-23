@@ -81,26 +81,35 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/check_type_cc_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Con Carne" />
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/check_type_verd_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Vegetariano" />
+                <RadioButton
+                    android:id="@+id/check_type_cc_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Con Carne" />
 
-            <CheckBox
-                android:id="@+id/check_type_veg_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Vegano" />
+                <RadioButton
+                    android:id="@+id/check_type_verd_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Vegetariano" />
+
+                <RadioButton
+                    android:id="@+id/check_type_veg_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Vegano" />
+            </RadioGroup>
+
         </LinearLayout>
 
     </LinearLayout>
