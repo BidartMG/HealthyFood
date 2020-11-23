@@ -33,6 +33,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -65,23 +66,16 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
-        val cal: Calendar = Calendar.getInstance()//import Calendar
-        //cal.setTimeInMillis(System.currentTimeMillis()) //agregue
-        //val date: Date = cal.getTime()//agregue
-        val date = LocalDate.now()
-        //val hora = trim(LocalTime.now())
 
-        val hora: LocalTime = LocalTime.of(0,0,0,0)
-
-        val hoy: LocalDateTime = LocalDateTime.of(date, hora)
+        val now = Instant.now()
+        val truncated = now.truncatedTo((ChronoUnit.DAYS))
 
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
-            //.whereGreaterThan("fechaRealizada", Timestamp.from(hoy)) //agregue
-            .orderBy("fechaRealizada").limit(3)
-            //.orderBy("fechaRealizada").startAt(hoy)
+            .whereGreaterThan("fechaRealizada", Timestamp.from(truncated)) //agregue
+            .orderBy("fechaRealizada")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
