@@ -122,10 +122,13 @@ class ListRealizadasFragment : Fragment() {
         var lText: ArrayList<String> = ArrayList()
         var formatter = SimpleDateFormat("dd-MM")
 
+        val now1 = Instant.now()
+        val truncatedUltimo = now1.minus(7, ChronoUnit.DAYS)
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
             .orderBy("fechaRealizada", Query.Direction.ASCENDING)
+            .whereGreaterThan("fechaRealizada", Timestamp.from(truncatedUltimo)) //agregue
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
