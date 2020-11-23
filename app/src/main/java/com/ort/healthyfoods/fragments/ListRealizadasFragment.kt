@@ -79,7 +79,8 @@ class ListRealizadasFragment : Fragment() {
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
-            .whereGreaterThan("fechaRealizada", Timestamp.from(hoy)) //agregue
+            //.whereGreaterThan("fechaRealizada", Timestamp.from(hoy)) //agregue
+            .orderBy("fechaRealizada").limit(3)
             //.orderBy("fechaRealizada").startAt(hoy)
             .get()
             .addOnSuccessListener { result ->
