@@ -26,7 +26,15 @@ import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.FoodDetail
 import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
+import java.lang.reflect.Array.set
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ListRealizadasFragment : Fragment() {
@@ -57,11 +65,22 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
+        val cal: Calendar = Calendar.getInstance()//import Calendar
+        //cal.setTimeInMillis(System.currentTimeMillis()) //agregue
+        //val date: Date = cal.getTime()//agregue
+        val date = LocalDate.now()
+        //val hora = trim(LocalTime.now())
+
+        val hora: LocalTime = LocalTime.of(0,0,0,0)
+
+        val hoy: LocalDateTime = LocalDateTime.of(date, hora)
 
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
+            .whereGreaterThan("fechaRealizada", Timestamp.from(hoy)) //agregue
+            //.orderBy("fechaRealizada").startAt(hoy)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -71,7 +90,7 @@ class ListRealizadasFragment : Fragment() {
                 }
                 caloriasConsumidas.setText(acumuladorCalorias.toString())
 
-                caloriasSemanales.setText("Estas dentro del límite semanal")
+                caloriasSemanales.setText("Total de calorias consumidas en el día")
 
 
             }
@@ -125,6 +144,7 @@ class ListRealizadasFragment : Fragment() {
                 chart.setPinchZoom(false)
                 chart.isDoubleTapToZoomEnabled = false
 
+
                 val l = chart.legend
                 l.isEnabled = false
 
@@ -152,7 +172,7 @@ class ListRealizadasFragment : Fragment() {
 
                 val barAcumulado = BarDataSet(lAcumulados, "Acumulados")
                 barAcumulado.axisDependency = YAxis.AxisDependency.LEFT
-                barAcumulado.color = Color.BLUE
+                barAcumulado.color = Color.GREEN
                 barAcumulado.setDrawValues(false)
 
                 val data = BarData(barAcumulado)
@@ -170,3 +190,14 @@ class ListRealizadasFragment : Fragment() {
 
     }
 }
+
+/*
+fun trim(date: Date): Date? {
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+    calendar[Calendar.MILLISECOND] = 0
+    calendar[Calendar.SECOND] = 0
+    calendar[Calendar.MINUTE] = 0
+    calendar[Calendar.HOUR] = 0
+    return calendar.time
+}*/
