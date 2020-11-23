@@ -57,12 +57,12 @@ class RegisterFragment : Fragment() {
         titulo.text = "Ingrese sus datos"
         btnCancel.setOnClickListener() {
             limpiarEditTexts()
-            // Buscar  cerrar o cancelar la vista
+            val goToLoginFragment = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+            vista.findNavController().navigate(goToLoginFragment)
         }
 
         btnAccept.setOnClickListener() {
             crearUserAutenticado()
-            //TODO Generar el registro en una base de datos para que se pueda leer
             db.collection("users").document(email.text.toString()).set(
                 hashMapOf("provider" to provider, // Ver si es de utilidad este proveedor
                     "nombre" to nombre.text.toString(),
@@ -82,12 +82,11 @@ class RegisterFragment : Fragment() {
         email.setText("")
         telefono.setText("")
         password.setText("")
-        // Buscar de resetear el id que se halla generado o no
     }
     private fun crearUserAutenticado () {
         if (inputsIsNotEmpty()) {
             if (email.text.isNotEmpty() && password.text.isNotEmpty()) {
-                provider = ProviderType.BASIC // Luego se sumará Google o Facebook
+                provider = ProviderType.BASIC
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                         email.text.toString(),
                         password.text.toString()

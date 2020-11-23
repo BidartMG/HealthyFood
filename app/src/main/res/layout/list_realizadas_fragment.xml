@@ -27,13 +27,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/edt_calorias_consumidas"
+            android:text="Calorias" />
         <EditText
             android:id="@+id/edt_calorias_consumidas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/edt_cal_cons"
             android:ems="10"
-            android:hint="@string/edt_cal_cons"
             android:inputType="textPersonName"
             android:text="@string/edt_cal_cons" />
 
@@ -60,6 +64,14 @@
             android:background="@color/colorPrimary"
             android:text="@string/btn_realizadas" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/grafico"
+            android:text="Evolución consumo diario de calorias" />
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/grafico"
             android:layout_width="match_parent"
