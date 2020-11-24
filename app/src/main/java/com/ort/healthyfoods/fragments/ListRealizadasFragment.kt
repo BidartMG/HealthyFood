@@ -100,7 +100,6 @@ class ListRealizadasFragment : Fragment() {
             val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
             vista.findNavController().navigate(comidasList)
         }
-
         return vista
     }
 
