@@ -76,6 +76,8 @@ class ListTipsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListTipsViewModel::class.java)
         // TODO: Use the ViewModel
+        viewModel.initTipsList()
+        viewModel.cargarTips_Base()
     }
 
 

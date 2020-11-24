@@ -25,6 +25,9 @@ import com.ort.healthyfoods.holders.FoodHolder
 class ListFoodFragment : Fragment() {
     private var viewModel: ListFoodViewModel =
         ListFoodViewModel() // zip
+
+    private var viewModelTip: ListTipsViewModel=ListTipsViewModel()
+
     lateinit var vista: View // zip
     lateinit var recComidas: RecyclerView// // zip
     lateinit var btnAdd: FloatingActionButton// // zip
@@ -51,6 +54,9 @@ class ListFoodFragment : Fragment() {
 
          //viewModel.cargarAlm_Cen_Base()
 
+
+        //viewModelTip.initTipsList()
+        //viewModelTip.cargarTips_Base()
         // ALMUERZOS
         db.collection("almuerzosYcenas")
             .get()

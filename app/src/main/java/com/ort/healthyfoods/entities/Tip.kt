@@ -3,16 +3,16 @@ package com.ort.healthyfoods.entities
 import android.os.Parcel
 import android.os.Parcelable
 
-class Tip (idTip:Int, titulo:String, descripcion:String, urlImagen:String) : Parcelable {
-        var idTip: Int
+class Tip (idTip:String, titulo:String, descripcion:String, urlImagen:String) : Parcelable {
+        var idTip: String
         var titulo: String
         var descripcion: String
         var urlImagen: String
 
-        constructor (): this (0,"","","")
+        constructor (): this ("0","","","")
 
         constructor(parcel: Parcel) : this(
-            parcel.readInt()!!,
+            parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!
@@ -25,7 +25,7 @@ class Tip (idTip:Int, titulo:String, descripcion:String, urlImagen:String) : Par
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
-        parcel.writeInt(idTip)
+        parcel.writeString(idTip)
         parcel.writeString(titulo)
         parcel.writeString(descripcion)
         parcel.writeString(urlImagen)
