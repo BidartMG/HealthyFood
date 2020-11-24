@@ -42,7 +42,8 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var vista: View
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
-    private lateinit var btnDetalle: Button
+
+    lateinit var btnDetalle : Button
 
 
 
@@ -88,9 +89,9 @@ class ListRealizadasFragment : Fragment() {
             }
 
         btnDetalle.setOnClickListener {
+
             //val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
             //vista.findNavController().navigate(comidasList)
-
         }
 
         return vista
