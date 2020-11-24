@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,7 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var vista: View
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
+    private lateinit var btnDetalle: Button
 
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
@@ -57,6 +59,7 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
+        btnDetalle = vista.findViewById(R.id.btn_detalle_realizadas)
 
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
@@ -78,6 +81,11 @@ class ListRealizadasFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
+
+        btnDetalle.setOnClickListener {
+            //val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
+            //vista.findNavController().navigate(comidasList)
+        }
 
         return vista
     }
