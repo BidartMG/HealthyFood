@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import com.ort.healthyfoods.entities.User
+import com.ort.healthyfoods.fragments.DetailFragmentArgs
 import java.sql.Timestamp
 import java.time.Instant
 

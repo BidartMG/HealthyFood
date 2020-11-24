@@ -29,7 +29,7 @@
     <string name="shr_logo_content_description">Imagen Logo Chef</string>
 
 
-    <string name="objetivo_cal">Objetivo Calorias Semanales: </string>
+    <string name="objetivo_cal">Calorias Consumidas del Día: </string>
     <string name="edt_cal_cons">Calorias Consumidas: </string>
     <string name="btn_realizadas">Ver Mis Comidas</string>
     <string name="button_next">siguiente</string>
@@ -39,5 +39,9 @@
 
     <string name="bar_chart">Bar Chart</string>
     <string name="grafico_progreso">Grafico progreso</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="email">Email</string>
+    <string name="telefono">Telefono</string>
 
 </resources>

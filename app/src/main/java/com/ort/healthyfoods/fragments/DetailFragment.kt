@@ -17,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import java.sql.Timestamp
-
 import java.time.Instant
 import java.util.Date.from
 
@@ -66,6 +65,10 @@ class DetailFragment : Fragment() {
             val goToMenu = DetailFragmentDirections.actionDetailFragmentToPresentacionFragment()
             vista.findNavController().navigate(goToMenu)
         }
+        btnVolver.setOnClickListener() {
+            vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListFoodFragment())
+        }
+
     }
 
     private fun setupUI () {

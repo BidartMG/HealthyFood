@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_registerFragment_to_presentacionFragment"
             app:destination="@id/presentacionFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
@@ -117,7 +120,14 @@
         android:id="@+id/listRealizadasFragment"
         android:name="com.ort.healthyfoods.fragments.ListRealizadasFragment"
         android:label="list_realizadas_fragment"
-        tools:layout="@layout/list_realizadas_fragment" />
+        tools:layout="@layout/list_realizadas_fragment" >
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_principalFragment"
+            app:destination="@id/principalFragment" />
+        <action
+            android:id="@+id/action_listRealizadasFragment_to_comidasRealizadasFragment"
+            app:destination="@id/comidasRealizadasFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addSnacksFragment"
         android:name="com.ort.healthyfoods.fragments.AddSnacksFragment"
@@ -174,4 +184,13 @@
         android:name="com.ort.healthyfoods.fragments.MisDatosFragment"
         android:label="mis_datos_fragment"
         tools:layout="@layout/mis_datos_fragment" />
+    <fragment
+        android:id="@+id/comidasRealizadasFragment"
+        android:name="com.ort.healthyfoods.fragments.ComidasRealizadasFragment"
+        android:label="fragment_comidas_realizadas"
+        tools:layout="@layout/fragment_comidas_realizadas" >
+        <action
+            android:id="@+id/action_comidasRealizadasFragment_to_listRealizadasFragment"
+            app:destination="@id/listRealizadasFragment" />
+    </fragment>
 </navigation>
