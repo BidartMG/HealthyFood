@@ -12,10 +12,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -28,18 +24,11 @@ import com.google.firebase.firestore.Query
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.FoodDetail
-import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
-import java.lang.reflect.Array.set
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.temporal.ChronoUnit
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ListRealizadasFragment : Fragment() {
@@ -55,6 +44,7 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var caloriasSemanales: TextView
 
     lateinit var btnDetalle : Button
+
 
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
@@ -74,6 +64,7 @@ class ListRealizadasFragment : Fragment() {
 
         val now = Instant.now()
         val truncated = now.truncatedTo((ChronoUnit.DAYS))
+
 
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
