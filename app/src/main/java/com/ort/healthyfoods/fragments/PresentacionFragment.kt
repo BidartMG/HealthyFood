@@ -39,6 +39,7 @@ class PresentacionFragment : Fragment() {
                 0 -> tab.text = "Menúes"
                 1 -> tab.text = "Mis Comidas"
                 2 -> tab.text = "Mis Datos"
+                3 -> tab.text = "Comidas realizadas"
                 else -> tab.text = "undefined"
             }
         }).attach()
@@ -54,6 +55,7 @@ class PresentacionFragment : Fragment() {
                 0 -> PrincipalFragment()
                 1 -> ListRealizadasFragment()
                 2 -> MisDatosFragment()
+                3 -> ComidasRealizadasFragment()
 
                 else -> PrincipalFragment()
             }
@@ -64,7 +66,7 @@ class PresentacionFragment : Fragment() {
         }
 
         companion object {
-            private const val TAB_COUNT = 3
+            private const val TAB_COUNT = 4
         }
     }
 }

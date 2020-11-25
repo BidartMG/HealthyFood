@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,18 +15,26 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 
 class ComidasRealizadasFragment : Fragment() {
 
     private lateinit var vista: View
-    private lateinit var listaComidas: RecyclerView
-    lateinit var btnVolver: FloatingActionButton
+    private lateinit var recListaComidas: RecyclerView
 
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var foodListAdapter: FoodListAdapter
 
-    var comidasRealizadasList: MutableList<Food> = arrayListOf()
+
+    var listaComidasRealizadas: MutableList<Food> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    companion object {
+        fun newInstance() = ComidasRealizadasFragment()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,29 +42,37 @@ class ComidasRealizadasFragment : Fragment() {
     ): View? {
         vista = inflater.inflate(R.layout.fragment_comidas_realizadas, container, false)
 
-        val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
-        listaComidas = vista.findViewById(R.id.recyclerViewComidas)
-        listaComidas.setHasFixedSize(true)
+        recListaComidas = vista.findViewById(R.id.recyclerViewComidas)
+        recListaComidas.setHasFixedSize(true)
         linearLayoutManager= LinearLayoutManager(context)
-        listaComidas.layoutManager = linearLayoutManager
+        recListaComidas.layoutManager = linearLayoutManager
 
-        btnVolver = vista.findViewById(R.id.btnVolver)
+        return vista
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
+
+        var today = Instant.now().truncatedTo(ChronoUnit.DAYS)
+
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
-            .orderBy("fechaRealizada")
+            .whereGreaterThan("fechaRealizada",Timestamp.from(today))
             .get()
             .addOnSuccessListener { result ->
+                foodListAdapter = FoodListAdapter(listaComidasRealizadas,requireContext()){}
+                recListaComidas.adapter  = foodListAdapter
                 for (document in result) {
                     val food = document.toObject(Food::class.java)
-                    comidasRealizadasList.add(food)
+                    listaComidasRealizadas.add(food)
                 }
             }
-            .addOnFailureListener {exception ->
+            .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
 
-        return vista
     }
 
 
