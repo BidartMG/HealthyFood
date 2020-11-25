@@ -1,6 +1,5 @@
 package com.ort.healthyfoods.fragments
 
-
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
@@ -23,24 +22,20 @@ import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.FoodHolder
 
 class ListFoodFragment : Fragment() {
-    private var viewModel: ListFoodViewModel =
-        ListFoodViewModel() // zip
 
+    private var viewModel: ListFoodViewModel = ListFoodViewModel()
     private var viewModelTip: ListTipsViewModel=ListTipsViewModel()
 
-    lateinit var vista: View // zip
-    lateinit var recComidas: RecyclerView// // zip
-    lateinit var btnAdd: FloatingActionButton// // zip
+    lateinit var vista: View
+    lateinit var recComidas: RecyclerView
+    lateinit var btnAdd: FloatingActionButton
 
-    var comidaList: MutableList<Food> = arrayListOf()// zip
-
-    var colacionesList: MutableList<Food> = arrayListOf()
+    var comidaList: MutableList<Food> = arrayListOf()
 
     private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // OJO NO SE USA
 
     val db: FirebaseFirestore = FirebaseFirestore.getInstance() // zip
 
-    //ver que onda estas dos siguientes
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: FoodListAdapter
 
@@ -51,13 +46,10 @@ class ListFoodFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          //viewModel.initTestList()
-
          //viewModel.cargarAlm_Cen_Base()
-
-
         //viewModelTip.initTipsList()
         //viewModelTip.cargarTips_Base()
-        // ALMUERZOS
+
         db.collection("almuerzosYcenas")
             .get()
             .addOnSuccessListener { result ->
@@ -66,23 +58,24 @@ class ListFoodFragment : Fragment() {
                     comidaList.add(myObject)
                 }
 
-                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}/** ESTO */
+                foodListAdapter = FoodListAdapter(comidaList,requireContext()){position -> onItemClick(position)}
                 recComidas.adapter  = foodListAdapter
 
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
-
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.list_food_fragment, container, false)
-        btnAdd = vista.findViewById(R.id.btn_add_listFood)// ok
 
-        recComidas = vista.findViewById(R.id.rec_comidas_listFood)// ok
+        btnAdd = vista.findViewById(R.id.btn_add_listFood)
+
+        recComidas = vista.findViewById(R.id.rec_comidas_listFood)
         recComidas.setHasFixedSize(true)
         linearLayoutManager= LinearLayoutManager(context)
         recComidas.layoutManager = linearLayoutManager
@@ -93,13 +86,10 @@ class ListFoodFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListFoodViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onStart() {
         super.onStart()
-        //var indice = ListFoodFragmentArgs.fromBundle(requireArguments()).index
-
 
         btnAdd.setOnClickListener() {
             val goToAddFood = ListFoodFragmentDirections.actionListFoodFragmentToAddFoodFragment()

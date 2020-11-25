@@ -31,7 +31,6 @@ class FoodHolder (view:View) : RecyclerView.ViewHolder(view) {
     fun getImageView(): ImageView {
         return vista.findViewById(R.id.img_item_food)
     }
-
 }
 
 

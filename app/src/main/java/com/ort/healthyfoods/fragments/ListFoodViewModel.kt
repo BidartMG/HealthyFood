@@ -8,10 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.entities.Food
 
 class ListFoodViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     var comidas: MutableList<Food> = arrayListOf()
-    var colaciones: MutableList<Food> = arrayListOf()
-
     lateinit var comidaPrueba: Food
 
     private val db = FirebaseFirestore.getInstance()
@@ -41,6 +38,7 @@ class ListFoodViewModel : ViewModel() {
                 "descripcion" to comidaPrueba.descripcion,
                 "urlImagen" to comidaPrueba.urlImagen
             )
+
             db.collection("almuerzosYcenas")
                 .add(newFood)
                 .addOnSuccessListener { documentReference ->
@@ -51,5 +49,4 @@ class ListFoodViewModel : ViewModel() {
                 }
         }
     }
-
 }

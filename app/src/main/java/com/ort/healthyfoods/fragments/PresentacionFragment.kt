@@ -10,7 +10,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 import com.ort.healthyfoods.R
 
 class PresentacionFragment : Fragment() {
@@ -22,24 +21,24 @@ class PresentacionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_presentacion, container, false)
+
         tabLayout = vista.findViewById(R.id.tab_layout)
         viewPager = vista.findViewById(R.id.view_pager)
+
         return vista
     }
 
     override fun onStart() {
         super.onStart()
         viewPager.setAdapter(createCardAdapter())
-        //viewPager.isUserInputEnabled=false
 
         TabLayoutMediator(tabLayout,viewPager,TabLayoutMediator.TabConfigurationStrategy { tab,position ->
             when (position) {
                 0 -> tab.text = "Menúes"
-                1 -> tab.text = "Mis Comidas"
-                2 -> tab.text = "Mis Datos"
-                3 -> tab.text = "Comidas realizadas"
+                1 -> tab.text = "Comidas realizadas"
+                2 -> tab.text = "Mi status"
+                3 -> tab.text = "Mis Datos"
                 else -> tab.text = "undefined"
             }
         }).attach()
@@ -53,9 +52,9 @@ class PresentacionFragment : Fragment() {
         override fun createFragment(position:Int):Fragment {
             return when(position) {
                 0 -> PrincipalFragment()
-                1 -> ListRealizadasFragment()
-                2 -> MisDatosFragment()
-                3 -> ComidasRealizadasFragment()
+                1 -> ComidasRealizadasFragment()
+                2 -> ListRealizadasFragment()
+                3 -> MisDatosFragment()
 
                 else -> PrincipalFragment()
             }

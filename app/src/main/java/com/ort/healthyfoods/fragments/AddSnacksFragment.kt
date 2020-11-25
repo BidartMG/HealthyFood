@@ -4,19 +4,18 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import java.sql.Timestamp
 import java.time.Instant
-
 
 class AddSnacksFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -33,7 +32,6 @@ class AddSnacksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_add_snacks, container, false)
         nombre = vista.findViewById(R.id.edt_name_snack)
         calorias = vista.findViewById(R.id.edt_calorias_snack)
@@ -52,6 +50,7 @@ class AddSnacksFragment : Fragment() {
             agregarColación()
             clear()
         }
+
         btnCancelar.setOnClickListener {
             clear()
             val goToBack = AddSnacksFragmentDirections.actionAddSnacksFragmentToListColacionesFragment()
@@ -78,20 +77,24 @@ class AddSnacksFragment : Fragment() {
                 "urlImagen" to colacion.urlImagen,
                 "fechaRealizada" to Timestamp.from(Instant.now())
             )
+
             db.collection("colaciones")
                 .add(newFood)
                 .addOnSuccessListener { documentReference ->
                     Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                    showAlert("Carga Exitosa")
+                    //showAlert("Carga Exitosa")
+                    //Snackbar.make(frameLayoutSnack,"CARGA EXITOSA!", Snackbar.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
                         e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
                     showAlert("Entró al ERROR")
+                    //Snackbar.make(frameLayoutSnack,"ERROR en la escritura", Snackbar.LENGTH_SHORT).show()
                 }
         } else {
             showAlert("ERROR, Debe completar todos los campos!")
-        }
+            //Snackbar.make(frameLayoutSnack,"ERROR, Debe completar todos los campos!", Snackbar.LENGTH_SHORT).show()
 
+        }
     }
 
     /**

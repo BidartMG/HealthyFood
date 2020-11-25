@@ -4,19 +4,18 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import java.sql.Timestamp
 import java.time.Instant
-
 
 class AddBreakfastFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -33,7 +32,6 @@ class AddBreakfastFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_add_breakfast, container, false)
         nombre = vista.findViewById(R.id.edt_nombre_desayuno)
         calorias = vista.findViewById(R.id.edt_calorias_desayuno)
@@ -65,8 +63,6 @@ class AddBreakfastFragment : Fragment() {
      * nuevo registro con los datos ingresados por el usuario, asignándole un id y cargándolo a la
      * base de datos correspondiente.
      */
-    //TODO verificar que el identificador sea único y se autoincremente, validar que no haya platos
-    // repetidos.
     private fun agregarDesayuno() {
         if(nombre.text.isNotEmpty() && descripcion.text.isNotEmpty() && urlImagen.text.isNotEmpty() && calorias.text.isNotEmpty()) {
             val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
@@ -86,16 +82,21 @@ class AddBreakfastFragment : Fragment() {
                 .add(newFood)
                 .addOnSuccessListener { documentReference ->
                     Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                    showAlert("Carga Exitosa")
+                    //showAlert("Carga Exitosa")
+                    //Snackbar.make(frameLayoutAddBreakfast,"CARGA EXITOSA!", Snackbar.LENGTH_SHORT).show()
+
                 }
                 .addOnFailureListener {
                         e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
                     showAlert("Entró al ERROR")
+                    //Snackbar.make(frameLayoutAddBreakfast,"ERROR en la escritura", Snackbar.LENGTH_SHORT).show()
+
                 }
         } else {
             showAlert("ERROR, Debe completar todos los campos!")
-        }
+            //Snackbar.make(frameLayoutAddBreakfast,"ERROR, Debe completar todos los campos!", Snackbar.LENGTH_SHORT).show()
 
+        }
     }
 
     /**
