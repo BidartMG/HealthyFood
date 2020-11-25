@@ -33,13 +33,12 @@ import kotlinx.android.synthetic.main.list_realizadas_fragment.*
 import java.lang.reflect.Array.set
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
+import java.time.*
+import java.time.LocalDate.now
 import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.truncate
 
 
 class ListRealizadasFragment : Fragment() {
@@ -54,7 +53,6 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
     lateinit var btnDetalle : Button
-
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -74,11 +72,17 @@ class ListRealizadasFragment : Fragment() {
         val now = Instant.now()
         val truncated = now.truncatedTo((ChronoUnit.DAYS))
 
+       // val dia = ZoneId.of("America/Buenos_Aires")
+       // val currentDateTime = ZonedDateTime.now(dia)
+       // val truncated2= currentDateTime.truncatedTo((ChronoUnit.DAYS))
+       // val truncated = truncated2.toInstant()
+        //print(truncated)
+
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
-            .whereGreaterThan("fechaRealizada", Timestamp.from(truncated)) //agregue
+            .whereGreaterThan("fechaRealizada", Timestamp.from(truncated)) //agregue Timestamp.from(truncated))
             .orderBy("fechaRealizada")
             .get()
             .addOnSuccessListener { result ->
@@ -124,7 +128,7 @@ class ListRealizadasFragment : Fragment() {
 
         val now1 = Instant.now()
         val truncatedUltimo = now1.minus(7, ChronoUnit.DAYS)
-
+        print(truncatedUltimo)
         db.collection("comidasRealizadas")
             .whereEqualTo("usuario", usuario)
             .orderBy("fechaRealizada", Query.Direction.ASCENDING)
