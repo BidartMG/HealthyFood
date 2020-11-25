@@ -51,10 +51,7 @@ class ListFoodFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          //viewModel.initTestList()
-
          //viewModel.cargarAlm_Cen_Base()
-
-
         //viewModelTip.initTipsList()
         //viewModelTip.cargarTips_Base()
         // ALMUERZOS
@@ -98,8 +95,6 @@ class ListFoodFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        //var indice = ListFoodFragmentArgs.fromBundle(requireArguments()).index
-
 
         btnAdd.setOnClickListener() {
             val goToAddFood = ListFoodFragmentDirections.actionListFoodFragmentToAddFoodFragment()

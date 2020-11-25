@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
+import com.ort.healthyfoods.adapters.TipListAdapter
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.Tip
 import com.ort.healthyfoods.holders.FoodHolder
@@ -34,7 +35,7 @@ class ListTipsFragment : Fragment() {
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     private lateinit var linearLayoutManager: LinearLayoutManager /** */
-    private lateinit var foodListAdapter: FoodListAdapter /** */
+    private lateinit var foodListAdapter: TipListAdapter
 
     companion object {
         fun newInstance() = ListTipsFragment()
@@ -44,8 +45,8 @@ class ListTipsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initTipsList()
-        viewModel.cargarTips_Base()
+        //viewModel.initTipsList()
+        //viewModel.cargarTips_Base()
 
         //TIPS
         db.collection("TipsYConsejos")
@@ -56,7 +57,7 @@ class ListTipsFragment : Fragment() {
                     consejosList.add(myObject)
                 }
 
-//                foodListAdapter = FoodListAdapter(consejosList,requireContext()){position -> onItemClick(position)}/** ESTO */
+//                foodListAdapter = FoodListAdapter(consejosList,requireContext()){position -> onItemClick(position)}
 //                recConsejos.adapter  = foodListAdapter
 
             }

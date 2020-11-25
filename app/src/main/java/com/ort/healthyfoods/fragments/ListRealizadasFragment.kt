@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -89,9 +90,9 @@ class ListRealizadasFragment : Fragment() {
             }
 
         btnDetalle.setOnClickListener {
-
+            val irA = PresentacionFragmentDirections.actionPresentacionFragmentToComidasRealizadasFragment()
             //val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
-            //vista.findNavController().navigate(comidasList)
+            vista.findNavController().navigate(irA)
         }
 
         return vista
