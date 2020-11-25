@@ -37,7 +37,7 @@ class PresentacionFragment : Fragment() {
             when (position) {
                 0 -> tab.text = "Menúes"
                 1 -> tab.text = "Comidas realizadas"
-                2 -> tab.text = "Mi status"
+                2 -> tab.text = "Estadística"
                 3 -> tab.text = "Mis Datos"
                 else -> tab.text = "undefined"
             }
