@@ -12,10 +12,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -28,9 +24,7 @@ import com.google.firebase.firestore.Query
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.FoodDetail
-import com.ort.healthyfoods.holders.FoodHolder
 import kotlinx.android.synthetic.main.list_realizadas_fragment.*
-import java.lang.reflect.Array.set
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.time.*
@@ -39,6 +33,9 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.truncate
+import java.time.Instant
+
+
 
 
 class ListRealizadasFragment : Fragment() {
@@ -52,6 +49,7 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var vista: View
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
+
     lateinit var btnDetalle : Button
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
@@ -78,6 +76,7 @@ class ListRealizadasFragment : Fragment() {
        // val truncated = truncated2.toInstant()
         //print(truncated)
 
+
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
@@ -101,8 +100,9 @@ class ListRealizadasFragment : Fragment() {
             }
 
         btnDetalle.setOnClickListener {
-            val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
-            vista.findNavController().navigate(comidasList)
+
+            //val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
+            //vista.findNavController().navigate(comidasList)
         }
 
         return vista

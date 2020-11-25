@@ -108,7 +108,7 @@ class AddFoodFragment : Fragment() {
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                showAlert("La comida se cargó en la BBDD")
+                showAlert("Carga Exitosa")
             }
             .addOnFailureListener {
                     e -> Log.w(TAG, "ERROR writing document", e)
@@ -121,7 +121,7 @@ class AddFoodFragment : Fragment() {
      */
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Hola")
+        builder.setTitle("ALMUERZOS Y CENAS")
         builder.setMessage(message)
         builder.setPositiveButton("Aceptar",null)
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()

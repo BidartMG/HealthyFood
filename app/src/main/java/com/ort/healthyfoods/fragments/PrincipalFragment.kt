@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import com.ort.healthyfoods.entities.Tip
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 
 class PrincipalFragment : Fragment() {
@@ -38,6 +40,14 @@ class PrincipalFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        var tip = obtenerTip()
+        if(tip.idTip != "-1") {
+            showAlert(tip.titulo, tip.descripcion)
+        } else {
+            showAlert("Este NO es un TIP SALUDABLE","Nada Saludable")
+        }
+
+
         img_desMer.setOnClickListener {
             val goToListBreackfast = PresentacionFragmentDirections.actionPresentacionFragmentToListBreackfastFragment()
             //val goToListBreackfast = PrincipalFragmentDirections.actionPrincipalFragmentToListBreackfastFragment()
@@ -53,6 +63,25 @@ class PrincipalFragment : Fragment() {
             //val goToListSnacks = PrincipalFragmentDirections.actionPrincipalFragmentToListColacionesFragment()
             vista.findNavController().navigate(goToListSnacks)
         }
+    }
+
+    private fun showAlert(title:String, message:String) {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("Aceptar",null)
+        val dialog: androidx.appcompat.app.AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun obtenerTip() : Tip {
+        var viewModelTip: ListTipsViewModel=ListTipsViewModel()
+
+        var tipLeido: Tip = Tip("-1","","","")
+
+        tipLeido = viewModelTip.obtenerTip()
+
+        return tipLeido
     }
 }
 

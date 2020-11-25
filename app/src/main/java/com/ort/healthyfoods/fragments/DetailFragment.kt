@@ -112,7 +112,7 @@ class DetailFragment : Fragment() {
 
      fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Hola")
+        builder.setTitle("Agregando Almuerzo/Cena")
         builder.setMessage(message)
         builder.setPositiveButton("Aceptar",null)
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
