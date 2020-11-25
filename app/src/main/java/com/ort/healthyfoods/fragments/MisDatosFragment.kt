@@ -9,15 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
-import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.User
-import kotlinx.android.synthetic.main.mis_datos_fragment.*
 
 @Suppress("UNREACHABLE_CODE")
 class MisDatosFragment : Fragment() {
@@ -39,7 +36,6 @@ class MisDatosFragment : Fragment() {
     lateinit var user : User
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +50,7 @@ class MisDatosFragment : Fragment() {
         password = vista.findViewById(R.id.txtPass)
         edit = vista.findViewById(R.id.btnEdit)
         save = vista.findViewById(R.id.btnGuardar)
+
         db.collection("users").document(usuario)
             .get()
             .addOnSuccessListener { result ->
@@ -134,7 +131,5 @@ class MisDatosFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MisDatosViewModel::class.java)
-        // TODO: Use the ViewModel
     }
-
 }

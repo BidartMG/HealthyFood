@@ -50,7 +50,6 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var caloriasConsumidas: TextView
     private lateinit var caloriasSemanales: TextView
 
-    lateinit var btnDetalle : Button
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -65,7 +64,6 @@ class ListRealizadasFragment : Fragment() {
 
         caloriasConsumidas = vista.findViewById(R.id.edt_calorias_consumidas)
         caloriasSemanales = vista.findViewById(R.id.edt_calorias_semana)
-        btnDetalle = vista.findViewById(R.id.btn_detalle_realizadas)
 
         val now = Instant.now()
         val truncated = now.truncatedTo((ChronoUnit.DAYS))
@@ -98,12 +96,6 @@ class ListRealizadasFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
-
-        btnDetalle.setOnClickListener {
-
-            //val comidasList = ListRealizadasFragmentDirections.actionListRealizadasFragmentToComidasRealizadasFragment()
-            //vista.findNavController().navigate(comidasList)
-        }
 
         return vista
     }

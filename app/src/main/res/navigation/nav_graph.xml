@@ -193,7 +193,10 @@
         android:label="fragment_comidas_realizadas"
         tools:layout="@layout/fragment_comidas_realizadas" >
         <action
-            android:id="@+id/action_comidasRealizadasFragment_to_listRealizadasFragment"
-            app:destination="@id/listRealizadasFragment" />
+            android:id="@+id/action_comidasRealizadasFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_comidasRealizadasFragment_to_presentacionFragment"
+            app:destination="@id/presentacionFragment" />
     </fragment>
 </navigation>

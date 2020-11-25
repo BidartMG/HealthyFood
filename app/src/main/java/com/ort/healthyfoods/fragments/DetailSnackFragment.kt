@@ -4,13 +4,13 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,6 +41,7 @@ class DetailSnackFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_detail_snack, container, false)
+
         btnSeleccionar = vista.findViewById(R.id.btn_seleccionar_snack)
         btnVolver = vista.findViewById(R.id.btn_volver_alMenu)
         image = vista.findViewById(R.id.img_detail_food)
@@ -54,12 +55,15 @@ class DetailSnackFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         comida = DetailSnackFragmentArgs.fromBundle(requireArguments()).snack
         setupUI()
+
         btnVolver.setOnClickListener {
             val goToListSnacks = DetailSnackFragmentDirections.actionDetailSnackFragmentToListColacionesFragment()
             vista.findNavController().navigate(goToListSnacks)
         }
+
         btnSeleccionar.setOnClickListener {
             agregarComidaRealizadaABase()
             val goToMenu = DetailSnackFragmentDirections.actionDetailSnackFragmentToPresentacionFragment()
@@ -93,15 +97,20 @@ class DetailSnackFragment : Fragment() {
             "urlImagen" to comidaRealizada.urlImagen,
             "fechaRealizada" to Timestamp.from(Instant.now())
         )
+
         db.collection("comidasRealizadas")
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
                 showAlert("Carga Exitosa")
+                //Snackbar.make(vista,"Carga Exitosa!", Snackbar.LENGTH_SHORT).show()
+
             }
             .addOnFailureListener {
                     e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
                 showAlert("Entró al ERROR")
+                //Snackbar.make(frameLayoutDetailSnack,"ERROR en la escritura", Snackbar.LENGTH_SHORT).show()
+
             }
     }
 

@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.holders.BreackfastHolder
-import com.ort.healthyfoods.holders.FoodHolder
 
 class BreackfastListAdapter (private var breackfastList : MutableList<Food>, var context: Context, val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<BreackfastHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreackfastHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false)
         return (BreackfastHolder(view))
@@ -31,8 +31,4 @@ class BreackfastListAdapter (private var breackfastList : MutableList<Food>, var
             .centerInside()
             .into(holder.getImageView())
     }
-
-
-
-
 }

@@ -29,10 +29,8 @@ class ListBreackfastFragment : Fragment() {
 
     var desayunoList: MutableList<Food> = arrayListOf()
 
-    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // TODO ver la utilidad de este adapter
+    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder>
 
-
-    // TODO ver si es reciclable el uso de foodListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: FoodListAdapter
 
@@ -57,10 +55,9 @@ class ListBreackfastFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListBreackfastViewModel::class.java)
-        // TODO: Use the ViewModel
         //viewModel.initDesayYMeriendas()
         //viewModel.cargarDes_Mer_Base()
-        // DESAYUNOS
+
         db.collection("desayunosYmeriendas")
             .get()
             .addOnSuccessListener { result ->
@@ -74,25 +71,19 @@ class ListBreackfastFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
-
     }
 
     override fun onStart() {
         super.onStart()
 
-        // TODO comprobar que la lista leída no se vuelva a cargar en la vista
         btnAdd.setOnClickListener() {
             val goToAddBreackfast = ListBreackfastFragmentDirections.actionListBreackfastFragmentToAddBreakfastFragment()
             vista.findNavController().navigate(goToAddBreackfast)
         }
     }
 
-
     fun onItemClick(position:Int) {
         val goToDetail = ListBreackfastFragmentDirections.actionListBreackfastFragmentToDetailBreakfastFragment(desayunoList[position])
         vista.findNavController().navigate(goToDetail)
     }
-
-
-
 }

@@ -14,7 +14,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.enums.ProviderType
 
-
 class RegisterFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var vista: View
@@ -39,6 +38,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_register, container, false)
+
         titulo = vista.findViewById(R.id.txt_tittle_register)
         nombre = vista.findViewById(R.id.edt_name_register)
         apellido = vista.findViewById(R.id.edt_lastname_register)
@@ -55,6 +55,7 @@ class RegisterFragment : Fragment() {
         super.onStart()
 
         titulo.text = "Ingrese sus datos"
+
         btnCancel.setOnClickListener() {
             limpiarEditTexts()
             val goToLoginFragment = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
@@ -73,7 +74,6 @@ class RegisterFragment : Fragment() {
             )
             limpiarEditTexts()
         }
-
     }
 
     private fun limpiarEditTexts () {
@@ -83,6 +83,7 @@ class RegisterFragment : Fragment() {
         telefono.setText("")
         password.setText("")
     }
+
     private fun crearUserAutenticado () {
         if (inputsIsNotEmpty()) {
             if (email.text.isNotEmpty() && password.text.isNotEmpty()) {
@@ -104,6 +105,7 @@ class RegisterFragment : Fragment() {
             showAlert("TODOS los campos deben estar completos")
         }
     }
+
     private fun showAlert(message:String) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Error")
@@ -112,8 +114,8 @@ class RegisterFragment : Fragment() {
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
         dialog.show()
     }
+
     private fun inputsIsNotEmpty() : Boolean{
         return (nombre.text.isNotEmpty() && apellido.text.isNotEmpty() && telefono.text.isNotEmpty())
     }
-
 }

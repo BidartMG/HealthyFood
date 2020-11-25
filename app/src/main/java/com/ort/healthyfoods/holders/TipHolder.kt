@@ -7,7 +7,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.ort.healthyfoods.R
 
-// TODO
 class TipHolder (view: View) : RecyclerView.ViewHolder(view) {
     private var vista: View
 
@@ -25,7 +24,7 @@ class TipHolder (view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun setDetail(detail: String) {
-        val txt: TextView = vista.findViewById(R.id.txt_detail_descrip)// verificar de donde lo traigo, puede fallar
+        val txt: TextView = vista.findViewById(R.id.txt_detail_descrip)
         txt.text = detail
     }
 

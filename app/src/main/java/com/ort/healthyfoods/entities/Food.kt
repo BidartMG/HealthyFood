@@ -65,6 +65,4 @@ class Food (idComida:Int, nombre:String, descripcion:String, tipoComida:String, 
         }
 
     }
-
-
 }

@@ -15,9 +15,11 @@ class FoodListAdapter (private var foodList : MutableList<Food>, var context: Co
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false)
         return (FoodHolder(view))
     }
+
     override fun getItemCount(): Int {
         return foodList.size
     }
+
     override fun onBindViewHolder(holder: FoodHolder, position: Int) {
         holder.setName(foodList[position].nombre)
         holder.getCardLayout().setOnClickListener() {

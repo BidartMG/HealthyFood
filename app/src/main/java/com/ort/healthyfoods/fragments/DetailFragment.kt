@@ -4,22 +4,22 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
+import kotlinx.android.synthetic.main.fragment_detail.*
 import java.sql.Timestamp
 import java.time.Instant
-import java.util.Date.from
-
 
 class DetailFragment : Fragment() {
     private lateinit var vista: View
@@ -42,6 +42,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_detail, container, false)
+
         image = vista.findViewById(R.id.img_detail_food)
         titulo = vista.findViewById(R.id.txt_name_item_food)
         calorias = vista.findViewById(R.id.txt_detail_calorias)
@@ -49,22 +50,27 @@ class DetailFragment : Fragment() {
         descripcion = vista.findViewById(R.id.txt_detail_descrip)
         btnSeleccionar = vista.findViewById(R.id.btn_seleccionar_food)
         btnVolver = vista.findViewById(R.id.btn_volver_lista)
+
         return vista
     }
 
     override fun onStart() {
         super.onStart()
+
         comida = DetailFragmentArgs.fromBundle(requireArguments()).comida
         setupUI()
+
         btnVolver.setOnClickListener() {
             val valor = DetailFragmentDirections.actionDetailFragmentToListFoodFragment()
             vista.findNavController().navigate(valor)
         }
+
         btnSeleccionar.setOnClickListener() {
             agregarComidaRealizadaABase()
             val goToMenu = DetailFragmentDirections.actionDetailFragmentToPresentacionFragment()
             vista.findNavController().navigate(goToMenu)
         }
+
         btnVolver.setOnClickListener() {
             vista.findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToListFoodFragment())
         }
@@ -97,16 +103,19 @@ class DetailFragment : Fragment() {
             "urlImagen" to comidaRealizada.urlImagen,
             "fechaRealizada" to Timestamp.from(Instant.now())
         )
+
         db.collection("comidasRealizadas")
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
                 showAlert("Carga Exitosa")
                 db.collection("users").document("misComidas")
+                //Snackbar.make(frameLayoutDetail,"Carga Exitosa!", Snackbar.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                     e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
                 showAlert("Entró al ERROR")
+                //Snackbar.make(frameLayoutDetail,"ERROR en la escritura", Snackbar.LENGTH_SHORT).show()
             }
     }
 

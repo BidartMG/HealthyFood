@@ -1,17 +1,14 @@
 package com.ort.healthyfoods.fragments
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -27,7 +24,6 @@ class LoginFragment : Fragment() {
 
     val PREF_NAME = "myPreferences"
 
-
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +34,13 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_login, container, false)
+
         usuario = vista.findViewById(R.id.emailEditText)
         password = vista.findViewById(R.id.passEditText)
         btnAceptar = vista.findViewById(R.id.ingresarButton)
         btnRegister = vista.findViewById(R.id.registrarseButton)
+
         return vista
     }
 
@@ -63,10 +60,11 @@ class LoginFragment : Fragment() {
             val goToRegister = LoginFragmentDirections.actionLoginFragmentToRegisterFragment2()
             vista.findNavController().navigate(goToRegister)
         }
+
         btnAceptar.setOnClickListener() {
             if (usuario.text.isNotEmpty() && password.text.isNotEmpty()) {
                 if(!usuario.text.isNotEmpty()) {
-                    editor.putString("USER", "ERROR") // REVISAR el Else
+                    editor.putString("USER", "ERROR")
                 }
                 editor.putString("USER", usuario.text.toString())
                 editor.apply()
@@ -84,6 +82,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
     private fun showAlert() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Error")
@@ -92,10 +91,9 @@ class LoginFragment : Fragment() {
         val dialog: androidx.appcompat.app.AlertDialog = builder.create()
         dialog.show()
     }
+
     private fun clear() {
         usuario.setText("")
         password.setText("")
-
     }
-    // TODO showTips()
 }
