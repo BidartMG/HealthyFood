@@ -10,7 +10,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 import com.ort.healthyfoods.R
 
 class PresentacionFragment : Fragment() {
@@ -22,17 +21,17 @@ class PresentacionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_presentacion, container, false)
+
         tabLayout = vista.findViewById(R.id.tab_layout)
         viewPager = vista.findViewById(R.id.view_pager)
+
         return vista
     }
 
     override fun onStart() {
         super.onStart()
         viewPager.setAdapter(createCardAdapter())
-        //viewPager.isUserInputEnabled=false
 
         TabLayoutMediator(tabLayout,viewPager,TabLayoutMediator.TabConfigurationStrategy { tab,position ->
             when (position) {

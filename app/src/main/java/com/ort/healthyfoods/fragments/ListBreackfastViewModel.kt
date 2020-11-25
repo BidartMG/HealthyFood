@@ -7,9 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.entities.Food
 
 class ListBreackfastViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     var desayunos: MutableList<Food> = arrayListOf()
-
     lateinit var comidaPrueba: Food
 
     private val db = FirebaseFirestore.getInstance()

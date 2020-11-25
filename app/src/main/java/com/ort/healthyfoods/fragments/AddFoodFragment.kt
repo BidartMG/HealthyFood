@@ -4,18 +4,19 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
 import kotlinx.android.synthetic.main.fragment_add_food.*
-import java.sql.Timestamp
-import java.time.Instant
 
 class AddFoodFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -35,7 +36,6 @@ class AddFoodFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_add_food, container, false)
         nombre = vista.findViewById(R.id.edt_nombre_food)
         calorias = vista.findViewById(R.id.edt_calorias_food)
@@ -83,7 +83,6 @@ class AddFoodFragment : Fragment() {
             val goToBack = AddFoodFragmentDirections.actionAddFoodFragmentToListFoodFragment()
             vista.findNavController().navigate(goToBack)
         }
-
     }
 
     /**
@@ -104,15 +103,19 @@ class AddFoodFragment : Fragment() {
             "descripcion" to comidaPrueba.descripcion,
             "urlImagen" to comidaPrueba.urlImagen
         )
+
         db.collection("almuerzosYcenas")
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                showAlert("Carga Exitosa")
+                //showAlert("Carga Exitosa")
+                //Snackbar.make(frameLayoutAddFood,"CARGA EXITOSA!", Snackbar.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                     e -> Log.w(TAG, "ERROR writing document", e)
                 showAlert("Entró al ERROR")
+                //Snackbar.make(frameLayoutAddFood,"ERROR en al escritura del documento", Snackbar.LENGTH_SHORT).show()
+
             }
     }
 

@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ort.healthyfoods.R
-import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.Tip
-import com.ort.healthyfoods.holders.FoodHolder
 import com.ort.healthyfoods.holders.TipHolder
 
 class TipListAdapter (private var tipList : MutableList<Tip>, var context: Context, val onItemClick : (Int) -> Unit) : RecyclerView.Adapter<TipHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TipHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false)// TODO item_tip
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food,parent,false)
         return (TipHolder(view))
     }
 
@@ -31,5 +30,5 @@ class TipListAdapter (private var tipList : MutableList<Tip>, var context: Conte
             .load(tipList[position].urlImagen)
             .centerInside()
             .into(holder.getImageView())
-}
+    }
 }

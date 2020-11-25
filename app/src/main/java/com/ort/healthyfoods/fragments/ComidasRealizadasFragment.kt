@@ -4,23 +4,18 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.entities.Food
-import com.ort.healthyfoods.holders.FoodHolder
-
 
 class ComidasRealizadasFragment : Fragment() {
 
@@ -42,6 +37,7 @@ class ComidasRealizadasFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 
         db.collection("comidasRealizadas")
@@ -58,8 +54,10 @@ class ComidasRealizadasFragment : Fragment() {
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
+                //Snackbar.make(frameLayout2,"ERROR en la lectura", Snackbar.LENGTH_SHORT).show()
             }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

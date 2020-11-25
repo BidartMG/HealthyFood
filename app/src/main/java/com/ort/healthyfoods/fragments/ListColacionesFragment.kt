@@ -29,8 +29,7 @@ class ListColacionesFragment : Fragment() {
 
     var colacionesList: MutableList<Food> = arrayListOf()
 
-    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder> // OJO NO SE USA
-
+    private lateinit var adapter: FirestoreRecyclerAdapter<Food, FoodHolder>
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: FoodListAdapter
@@ -39,27 +38,28 @@ class ListColacionesFragment : Fragment() {
         fun newInstance() = ListColacionesFragment()
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.list_colaciones_fragment, container, false)
+
         btnAdd = vista.findViewById(R.id.btn_add_snack)
         recColaciones = vista.findViewById(R.id.recColaciones)
         recColaciones.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(context)
         recColaciones.layoutManager = linearLayoutManager
+
         return vista
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(ListColacionesViewModel::class.java)
-        // TODO: Use the ViewModel
         //viewModel.initColaciones()
         //viewModel.cargar_Colaciones_Base()
-        // COLACIONES
+
         db.collection("colaciones")
             .get()
             .addOnSuccessListener { result ->
@@ -73,16 +73,17 @@ class ListColacionesFragment : Fragment() {
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
-
     }
 
     override fun onStart() {
         super.onStart()
+
         btnAdd.setOnClickListener {
             val goToAddSnack = ListColacionesFragmentDirections.actionListColacionesFragmentToAddSnacksFragment()
             vista.findNavController().navigate(goToAddSnack)
         }
     }
+
     fun onItemClick(position:Int) {
         val goToDetailSnack = ListColacionesFragmentDirections.actionListColacionesFragmentToDetailSnackFragment(colacionesList[position])
         vista.findNavController().navigate(goToDetailSnack)

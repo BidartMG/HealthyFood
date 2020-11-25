@@ -4,23 +4,22 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
 import com.ort.healthyfoods.entities.Food
-import com.ort.healthyfoods.entities.User
-import com.ort.healthyfoods.fragments.DetailFragmentArgs
+import kotlinx.android.synthetic.main.fragment_detail_breakfast.*
 import java.sql.Timestamp
 import java.time.Instant
-
 
 class DetailBreakfastFragment : Fragment() {
     private lateinit var vista: View
@@ -35,7 +34,6 @@ class DetailBreakfastFragment : Fragment() {
     private lateinit var comida: Food
     private val db = FirebaseFirestore.getInstance()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -45,6 +43,7 @@ class DetailBreakfastFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_detail_breakfast, container, false)
+
         image = vista.findViewById(R.id.img_detail_food)
         titulo = vista.findViewById(R.id.txt_name_item_food)
         calorias = vista.findViewById(R.id.txt_detail_calorias)
@@ -52,17 +51,21 @@ class DetailBreakfastFragment : Fragment() {
         descripcion = vista.findViewById(R.id.txt_detail_descrip)
         btnSeleccionar = vista.findViewById(R.id.btn_seleccionar_desayuno)
         btnVolver = vista.findViewById(R.id.btn_volver_lista_desayunos)
+
         return vista
     }
 
     override fun onStart() {
         super.onStart()
+
         comida = DetailBreakfastFragmentArgs.fromBundle(requireArguments()).comida
         setupUI()
+
         btnVolver.setOnClickListener {
             val goToListBreackfast = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToListBreackfast)
         }
+
         btnSeleccionar.setOnClickListener {
             agregarComidaRealizadaABase()
             val goToMenu = DetailBreakfastFragmentDirections.actionDetailBreakfastFragmentToPresentacionFragment()
@@ -96,25 +99,16 @@ class DetailBreakfastFragment : Fragment() {
             "urlImagen" to comidaRealizada.urlImagen,
             "fechaRealizada" to Timestamp.from(Instant.now())
         )
+
         db.collection("comidasRealizadas")
             .add(newFood)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG,"DocumentSnapshot written with ID: ${documentReference.id}")
-                showAlert("Carga Exitosa")
+                Snackbar.make(frameLayoutDetailBreackfast,"Carga Exitosa",Snackbar.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                     e -> Log.w(ContentValues.TAG, "ERROR writing document", e)
-                showAlert("Entró al ERROR")
+                Snackbar.make(frameLayoutDetailBreackfast,"ERROR",Snackbar.LENGTH_SHORT).show()
             }
     }
-
-    fun showAlert(message:String) {
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Agregando Desayuno/Merienda")
-        builder.setMessage(message)
-        builder.setPositiveButton("Aceptar",null)
-        val dialog: androidx.appcompat.app.AlertDialog = builder.create()
-        dialog.show()
-    }
-
 }

@@ -10,7 +10,6 @@ import com.ort.healthyfoods.entities.Tip
 
 
 class ListTipsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     var consejos: MutableList<Tip> = arrayListOf()
 
     lateinit var consejoPrueba: Tip
@@ -33,18 +32,19 @@ class ListTipsViewModel : ViewModel() {
         consejos.add(Tip(8,"TIP 8: Limitar el consumo de alcohol y bebidas azucaradas.","Está claro que las bebidas espirituosas no ayudan en nada a mantener un buen estado de salud ya que solo te aportan muchas calorías vacías y azúcar.","https://www.nutriban.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2020/03/no-alcohol-294x300.jpg.webp"))
         consejos.add(Tip(9,"TIP 9: Beber el agua que necesites.","Pese a lo que se cree, el agua no adelgaza, por eso no es necesario estar todo el día con la botellita en la mano. Así, que bebe lo que tu cuerpo te demande, ni más ni menos.","https://www.nutriban.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2020/03/AGUA-1.jpg.webp"))
         consejos.add(Tip(10,"TIP 10: Aceite de oliva","Producto estrella de nuestra dieta mediterránea. Sin duda, la mejor opción para usar en crudo como en tu cocina ya que tiene grasas saludables. Pero no por ello te debes de pasar tampoco ya que, recordemos, es grasa y es calórica.","https://www.nutriban.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2020/03/aceite-de-oliva.jpg.webp"))
-
     }
 
     fun cargarTips_Base() {
         for (elemento in consejos){
             consejoPrueba = elemento
+
             var newTip = hashMapOf(
                 "idTip" to consejoPrueba.idTip,
                 "titulo" to consejoPrueba.titulo,
                 "descripcion" to consejoPrueba.descripcion,
                 "urlImagen" to consejoPrueba.urlImagen
             )
+
             db.collection("TipsYConsejos")
                 .add(newTip)
                 .addOnSuccessListener { documentReference ->
@@ -55,9 +55,4 @@ class ListTipsViewModel : ViewModel() {
                 }
         }
     }
-
-
-
-
-
 }

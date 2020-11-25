@@ -1,40 +1,29 @@
 package com.ort.healthyfoods.fragments
 
 import android.content.ContentValues
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
-import com.ort.healthyfoods.adapters.FoodListAdapter
 import com.ort.healthyfoods.adapters.TipListAdapter
-import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.Tip
-import com.ort.healthyfoods.holders.FoodHolder
 
 class ListTipsFragment : Fragment() {
-
     lateinit var vista: View
     lateinit var recConsejos: RecyclerView
-    //lateinit var btnAdd: FloatingActionButton
 
     var consejosList: MutableList<Tip> = arrayListOf()
 
-   // private lateinit var adapter: FirestoreRecyclerAdapter<Tip, TipHolder>
-
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    private lateinit var linearLayoutManager: LinearLayoutManager /** */
+    private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var foodListAdapter: TipListAdapter
 
     companion object {
@@ -45,10 +34,7 @@ class ListTipsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //viewModel.initTipsList()
-        //viewModel.cargarTips_Base()
 
-        //TIPS
         db.collection("TipsYConsejos")
             .get()
             .addOnSuccessListener { result ->
@@ -56,10 +42,6 @@ class ListTipsFragment : Fragment() {
                     val myObject = document.toObject(Tip::class.java)
                     consejosList.add(myObject)
                 }
-
-//                foodListAdapter = FoodListAdapter(consejosList,requireContext()){position -> onItemClick(position)}
-//                recConsejos.adapter  = foodListAdapter
-
             }
             .addOnFailureListener {exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ")
@@ -76,18 +58,8 @@ class ListTipsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListTipsViewModel::class.java)
-        // TODO: Use the ViewModel
+
         viewModel.initTipsList()
         viewModel.cargarTips_Base()
     }
-
-
-
-
-
-    fun onItemClick(position:Int) {
-        //val goToDetail = ListFoodFragmentDirections.actionListFoodFragmentToDetailFragment(consejosList[position])
-        //vista.findNavController().navigate(goToDetail)
-    }
-
 }

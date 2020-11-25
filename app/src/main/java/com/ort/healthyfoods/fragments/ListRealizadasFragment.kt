@@ -31,9 +31,7 @@ import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-
 class ListRealizadasFragment : Fragment() {
-
 
     companion object {
         fun newInstance() = ListRealizadasFragment()
@@ -45,8 +43,6 @@ class ListRealizadasFragment : Fragment() {
     private lateinit var caloriasSemanales: TextView
 
     lateinit var btnDetalle : Button
-
-
 
     var comidasRealizadasList: MutableList<Food> = arrayListOf()
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -65,7 +61,6 @@ class ListRealizadasFragment : Fragment() {
 
         val now = Instant.now()
         val truncated = now.truncatedTo((ChronoUnit.DAYS))
-
 
         val usuario: String = requireContext().getSharedPreferences("myPreferences", Context.MODE_PRIVATE).getString("USER","default")!!
 

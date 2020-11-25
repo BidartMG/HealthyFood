@@ -17,6 +17,7 @@ class Tip (idTip:Int, titulo:String, descripcion:String, urlImagen:String) : Par
             parcel.readString()!!,
             parcel.readString()!!
         )
+
     init {
         this.idTip = idTip
         this.titulo = titulo

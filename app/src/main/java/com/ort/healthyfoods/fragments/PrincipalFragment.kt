@@ -3,23 +3,18 @@ package com.ort.healthyfoods.fragments
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ort.healthyfoods.R
-import com.ort.healthyfoods.entities.Food
 import com.ort.healthyfoods.entities.Tip
-import kotlinx.android.synthetic.main.fragment_detail.*
 import java.util.*
 
-
 class PrincipalFragment : Fragment() {
-
     lateinit var vista: View
     lateinit var img_desMer: ImageView
     lateinit var img_almCen: ImageView
@@ -34,6 +29,7 @@ class PrincipalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         vista = inflater.inflate(R.layout.fragment_principal, container, false)
+
         img_almCen = vista.findViewById(R.id.img_alm_cen)
         img_colac = vista.findViewById(R.id.img_colac)
         img_desMer = vista.findViewById(R.id.img_des_mer)
@@ -50,11 +46,13 @@ class PrincipalFragment : Fragment() {
             //val goToListBreackfast = PrincipalFragmentDirections.actionPrincipalFragmentToListBreackfastFragment()
             vista.findNavController().navigate(goToListBreackfast)
         }
+
         img_almCen.setOnClickListener {
             val goToListFood = PresentacionFragmentDirections.actionPresentacionFragmentToListFoodFragment()
             //val goToListFood = PrincipalFragmentDirections.actionPrincipalFragmentToListFoodFragment()
             vista.findNavController().navigate(goToListFood)
         }
+
         img_colac.setOnClickListener {
             val goToListSnacks = PresentacionFragmentDirections.actionPresentacionFragmentToListColacionesFragment()
             //val goToListSnacks = PrincipalFragmentDirections.actionPrincipalFragmentToListColacionesFragment()
@@ -96,9 +94,5 @@ class PrincipalFragment : Fragment() {
                 Log.d(ContentValues.TAG, "Error getting documents: ")
             }
     }
-
-
-
-
 }
 
